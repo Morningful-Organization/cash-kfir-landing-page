@@ -1,4 +1,4 @@
-# Morningful AI Landing Page
+# Morningful AI Landing Page 
 
 A modern, clean React landing page for Morningful AI's financial management platform.
 
