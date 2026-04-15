@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npx --prefix \"c:/Morningful - Landing page\" tsc --noEmit -p \"c:/Morningful - Landing page/tsconfig.json\")"
+    ]
+  }
+}

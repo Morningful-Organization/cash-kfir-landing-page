@@ -15,8 +15,7 @@ interface ChatbotProps {
 
 const TOPICS = [
   'General contact',
-  'Feedback', 
-  'Become a beta user',
+  'Feedback',
   'Demo request',
   'Technical support'
 ];
@@ -34,13 +33,6 @@ const getTopicQuestions = (topic: string): string[] => {
         'We\'d love to hear your feedback! What would you like to share?',
         'How can we improve our cash flow management solution?',
         'Please provide your email address so we can follow up on your feedback.'
-      ];
-    case 'Become a beta user':
-      return [
-        'Exciting! Tell us more about your interest in becoming a beta user.',
-        'What specific features are you most excited to test?',
-        'How many transactions does your company typically process monthly?',
-        'Please provide your email address so we can send you beta access information.'
       ];
     case 'Demo request':
       return [

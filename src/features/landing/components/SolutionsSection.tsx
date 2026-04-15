@@ -42,13 +42,13 @@ interface SolutionData {
 interface SolutionCardProps {
   solution: SolutionData;
   index: number;
-  onJoinBeta: () => void;
+  onSignIn: () => void;
 }
 
 const SolutionCard: React.FC<SolutionCardProps> = ({
   solution,
   index,
-  onJoinBeta,
+  onSignIn,
 }) => {
   return (
     <motion.div
@@ -95,9 +95,9 @@ const SolutionCard: React.FC<SolutionCardProps> = ({
           <Button
             variant="outline"
             className="group/btn border-[#00d4ff] text-[#00d4ff] hover:bg-[#00d4ff] hover:text-white"
-            onClick={onJoinBeta}
+            onClick={onSignIn}
           >
-            Join Beta
+            Sign In
             <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
           </Button>
         </div>
@@ -106,14 +106,12 @@ const SolutionCard: React.FC<SolutionCardProps> = ({
   );
 };
 
-interface SolutionsSectionProps {
-  onJoinBetaWaitlist: () => void;
-}
-
-const SolutionsSection: React.FC<SolutionsSectionProps> = ({
-  onJoinBetaWaitlist,
-}) => {
+const SolutionsSection: React.FC = () => {
   const { ref, isInView } = useScrollAnimation();
+
+  const handleSignIn = () => {
+    window.open('https://app.morningful.ai', '_blank');
+  };
 
   return (
     <section
@@ -147,7 +145,7 @@ const SolutionsSection: React.FC<SolutionsSectionProps> = ({
               key={solution.title}
               solution={solution}
               index={index}
-              onJoinBeta={onJoinBetaWaitlist}
+              onSignIn={handleSignIn}
             />
           ))}
         </div>

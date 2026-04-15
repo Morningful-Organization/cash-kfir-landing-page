@@ -53,12 +53,8 @@ const LogoWordmark = () => {
   );
 };
 
-interface NavigationProps {
-  onJoinBetaWaitlist?: () => void;
-}
-
-const Navigation: React.FC<NavigationProps> = ({ onJoinBetaWaitlist }) => {
-  const { trackNavigation, trackCTAClick } = useAnalytics();
+const Navigation: React.FC = () => {
+  const { trackNavigation } = useAnalytics();
 
   const navItems = [
     { label: 'Features', href: '#features' },
@@ -74,11 +70,6 @@ const Navigation: React.FC<NavigationProps> = ({ onJoinBetaWaitlist }) => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const handleBetaClick = () => {
-    trackCTAClick('Join Beta Waitlist', 'navigation');
-    onJoinBetaWaitlist?.();
   };
 
   const handleLogoClick = () => {
@@ -129,20 +120,11 @@ const Navigation: React.FC<NavigationProps> = ({ onJoinBetaWaitlist }) => {
           </div>
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Button
-              variant="ghost"
               size="sm"
               onClick={handleSignInClick}
-              className="px-2 sm:px-3 text-xs sm:text-sm text-gray-700 hover:text-[#00d4ff] transition-colors duration-300"
-            >
-              Sign In
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleBetaClick}
               className="px-2 sm:px-6 bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] text-xs sm:text-sm rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00d4ff]/25"
             >
-              <span className="hidden sm:inline">Join Beta Waitlist</span>
-              <span className="sm:hidden">Join Beta</span>
+              Sign In
             </Button>
           </div>
         </div>
