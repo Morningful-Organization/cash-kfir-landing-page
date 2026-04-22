@@ -6,13 +6,12 @@ import {
   FeaturesSection,
   SolutionsSection,
   TestimonialsSection,
+  PricingSection,
   CTASection,
 } from './features/landing';
-import { BetaWaitlistModal } from './features/beta-waitlist';
 import { ContactModal } from './features/contact';
 import { Chatbot } from './features/chatbot';
 import {
-  useBetaWaitlist,
   useAnalytics,
   useScrollTracking,
   useContact,
@@ -24,7 +23,6 @@ import { TermsOfServiceModal } from './features/terms-of-service';
 
 function App() {
   const contactHook = useContact();
-  const betaWaitlistHook = useBetaWaitlist();
   const privacyPolicyHook = usePrivacyPolicy();
   const termsOfServiceHook = useTermsOfService();
 
@@ -35,25 +33,17 @@ function App() {
   return (
     <ErrorBoundary>
       <Layout
-        onJoinBetaWaitlist={betaWaitlistHook.openModal}
         onContactClick={contactHook.openModal}
         onPrivacyPolicyClick={privacyPolicyHook.openModal}
         onTermsOfServiceClick={termsOfServiceHook.openModal}
       >
-        <HeroSection onJoinBetaWaitlist={betaWaitlistHook.openModal} />
+        <HeroSection />
         <StatsSection />
         <FeaturesSection />
-        <SolutionsSection onJoinBetaWaitlist={betaWaitlistHook.openModal} />
+        <SolutionsSection />
         <TestimonialsSection />
-        <CTASection
-          onJoinBetaWaitlist={betaWaitlistHook.openModal}
-          onContactClick={contactHook.openModal}
-        />
-        <BetaWaitlistModal
-          isOpen={betaWaitlistHook.isModalOpen}
-          onClose={betaWaitlistHook.closeModal}
-          betaHook={betaWaitlistHook}
-        />
+        <PricingSection />
+        <CTASection onContactClick={contactHook.openModal} />
         <ContactModal
           isOpen={contactHook.isModalOpen}
           onClose={contactHook.closeModal}

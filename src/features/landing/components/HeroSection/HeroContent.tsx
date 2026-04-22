@@ -5,16 +5,12 @@ import { Button } from '../../../../shared/components/ui/Button';
 import { ANIMATION_VARIANTS } from '../../../../shared/constants/ui';
 import { useAnalytics } from '../../../../shared/hooks';
 
-type HeroContentProps = {
-  onJoinBetaWaitlist: () => void;
-};
-
-const HeroContent: React.FC<HeroContentProps> = ({ onJoinBetaWaitlist }) => {
+const HeroContent: React.FC = () => {
   const { trackCTAClick } = useAnalytics();
 
-  const handleJoinBetaWaitlist = () => {
-    trackCTAClick('Join Beta Waitlist', 'hero_section');
-    onJoinBetaWaitlist();
+  const handleSignIn = () => {
+    trackCTAClick('Sign In', 'hero_section');
+    window.open('https://app.morningful.ai', '_blank');
   };
 
   const handleLearnMore = () => {
@@ -67,10 +63,10 @@ const HeroContent: React.FC<HeroContentProps> = ({ onJoinBetaWaitlist }) => {
       >
         <Button
           size="lg"
-          onClick={handleJoinBetaWaitlist}
+          onClick={handleSignIn}
           className="bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] font-semibold px-8 py-4 h-auto text-lg rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00d4ff]/25"
         >
-          Join Beta Waitlist
+          Sign In
           <ArrowRight className="ml-2 w-5 h-5" />
         </Button>
         <Button

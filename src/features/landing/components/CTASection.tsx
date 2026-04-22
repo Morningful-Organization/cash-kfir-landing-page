@@ -6,20 +6,16 @@ import { useScrollAnimation } from '../../../shared/hooks/useAnimation';
 import { useAnalytics } from '../../../shared/hooks';
 
 interface CTASectionProps {
-  onJoinBetaWaitlist: () => void;
   onContactClick?: () => void;
 }
 
-const CTASection: React.FC<CTASectionProps> = ({
-  onJoinBetaWaitlist,
-  onContactClick,
-}) => {
+const CTASection: React.FC<CTASectionProps> = ({ onContactClick }) => {
   const { ref, isInView } = useScrollAnimation();
   const { trackCTAClick } = useAnalytics();
 
-  const handleBetaClick = () => {
-    trackCTAClick('Join Beta Waitlist', 'cta_section');
-    onJoinBetaWaitlist();
+  const handleSignInClick = () => {
+    trackCTAClick('Sign In', 'cta_section');
+    window.open('https://app.morningful.ai', '_blank');
   };
 
   const handleContactSalesClick = () => {
@@ -29,7 +25,6 @@ const CTASection: React.FC<CTASectionProps> = ({
 
   return (
     <section
-      id="pricing"
       ref={ref}
       className="py-24 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden"
     >
@@ -100,10 +95,10 @@ const CTASection: React.FC<CTASectionProps> = ({
           >
             <Button
               size="lg"
-              onClick={handleBetaClick}
+              onClick={handleSignInClick}
               className="bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] font-bold px-12 py-6 h-auto text-xl rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00d4ff]/25 group"
             >
-              Join Beta Waitlist
+              Sign In
               <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
 
@@ -124,7 +119,7 @@ const CTASection: React.FC<CTASectionProps> = ({
             className="mt-12 text-gray-500"
           >
             <p className="mb-4">
-              No credit card required • 1 month free trial • Full access
+              No credit card required • 14 days free trial • Full access
             </p>
             <div className="flex justify-center items-center space-x-8 text-sm">
               <div className="flex items-center">
