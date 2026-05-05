@@ -12,6 +12,7 @@ import {
 import { ContactModal } from './features/contact';
 import { Chatbot } from './features/chatbot';
 import {
+  useApolloTracker,
   useAnalytics,
   useScrollTracking,
   useContact,
@@ -27,6 +28,7 @@ function App() {
   const termsOfServiceHook = useTermsOfService();
 
   // Initialize analytics tracking
+  useApolloTracker();
   useAnalytics();
   useScrollTracking();
 
