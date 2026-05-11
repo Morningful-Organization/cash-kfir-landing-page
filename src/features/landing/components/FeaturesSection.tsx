@@ -4,6 +4,9 @@ import {
   BarChart3,
   Shield,
   PieChart,
+  Bot,
+  Building2,
+  Link2,
   CheckCircle,
 } from 'lucide-react';
 import {
@@ -14,39 +17,82 @@ import {
 const FEATURES_DATA = [
   {
     icon: BarChart3,
-    title: 'Real-Time Cash Management',
+    title: 'Cash Visibility & Control',
+    description:
+      'Track liquidity across all linked accounts in one place, with instant visibility into balances, inflows, and outflows.',
     bulletPoints: [
-      'Real-Time Monitoring',
-      'Multi-Account View', 
-      'Instant Alerts'
+      'Real-time multi-account monitoring',
+      'Cash optimizer for daily decisions',
+      'Smart alerts for unusual activity',
     ],
     color: 'from-blue-400 to-cyan-500',
   },
   {
-    icon: Shield,
-    title: 'Bank-Level Security',
+    icon: Bot,
+    title: 'AI Finance Assistant',
+    description:
+      'Turn raw transaction data into daily, actionable recommendations your team can execute quickly.',
     bulletPoints: [
-      'SOC 2 in progress',
-      'GDPR ready',
-      'End-to-End Encryption'
+      'Daily AI-generated CFO insights',
+      'AI agent for finance questions',
+      'Deposit and cash-flow recommendations',
+    ],
+    color: 'from-indigo-400 to-blue-500',
+  },
+  {
+    icon: PieChart,
+    title: 'Analytics & Reporting',
+    description:
+      'Analyze trends, compare performance, and identify risk areas with reporting designed for finance teams.',
+    bulletPoints: [
+      'Category-level spend breakdowns',
+      'Revenue and runway trend analysis',
+      'Sharable management-ready reports',
+    ],
+    color: 'from-purple-400 to-indigo-500',
+  },
+  {
+    icon: Building2,
+    title: 'Corporate Team Workflows',
+    description:
+      'Support client and multi-entity operations with centralized oversight and approval flows.',
+    bulletPoints: [
+      'Corporate dashboard and client views',
+      'Centralized alerts and snapshots',
+      'Role-based collaboration controls',
+    ],
+    color: 'from-emerald-400 to-teal-500',
+  },
+  {
+    icon: Shield,
+    title: 'Security & Reliability',
+    description:
+      'Built for secure financial operations with controlled access, encryption, and resilient integrations.',
+    bulletPoints: [
+      'End-to-end encrypted integrations',
+      'Granular access and account controls',
+      'Production-ready monitoring and tracing',
     ],
     color: 'from-green-400 to-emerald-500',
   },
   {
-    icon: PieChart,
-    title: 'Actionable Insights',
+    icon: Link2,
+    title: 'Connected Banking Infrastructure',
+    description:
+      'Unify account connections and keep your financial data pipeline healthy with guided reconnect and sync workflows.',
     bulletPoints: [
-      'Spending Categories',
-      'Revenue Streams',
-      'Cost Analytics'
+      'Secure multi-bank aggregation',
+      'Automatic sync and status monitoring',
+      'Guided reconnect for login-required items',
     ],
-    color: 'from-indigo-400 to-blue-500',
+    color: 'from-cyan-400 to-blue-500',
   },
 ];
 
 interface FeatureData {
   icon: React.ElementType;
   title: string;
+  description: string;
   bulletPoints: string[];
   color: string;
 }
@@ -78,6 +124,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index }) => {
         <h3 className="text-2xl font-bold text-[#1a2332] mb-4 group-hover:text-[#00d4ff] transition-colors duration-300">
           {feature.title}
         </h3>
+
+        <p className="text-gray-600 leading-relaxed mb-5">
+          {feature.description}
+        </p>
 
         <ul className="space-y-2">
           {feature.bulletPoints.map((point, idx) => (
@@ -113,8 +163,8 @@ const FeaturesSection = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            A comprehensive toolset designed to give finance teams complete
-            control and clarity over their company's financial health.
+            Morningful combines real-time cash visibility, AI recommendations,
+            analytics, and corporate collaboration in one finance operating layer.
           </p>
         </motion.div>
 
@@ -122,7 +172,7 @@ const FeaturesSection = () => {
           variants={stagger.container}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {FEATURES_DATA.map((feature, index) => (
             <FeatureCard key={feature.title} feature={feature} index={index} />
