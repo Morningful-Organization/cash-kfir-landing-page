@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '../../../shared/components/ui/Button';
@@ -22,9 +22,9 @@ const PLANS: Plan[] = [
   {
     name: 'Morningful Pro',
     tagline: 'For finance teams who want deeper insight',
-    monthlyPrice: 9.99,
-    annualMonthlyPrice: 7.49,
-    annualTotal: 89.91,
+    monthlyPrice: 29.99,
+    annualMonthlyPrice: 22.49,
+    annualTotal: 269.91,
     features: [
       'AI Insights & CFO Reports',
       'Advanced Analytics & Reports',
@@ -62,6 +62,19 @@ const PricingSection: React.FC = () => {
   const { ref, isInView } = useScrollAnimation();
   const { trackCTAClick } = useAnalytics();
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('annual');
+
+  const monthlyBtnRef = useRef<HTMLButtonElement>(null);
+  const annualBtnRef = useRef<HTMLButtonElement>(null);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+
+  useLayoutEffect(() => {
+    const target =
+      billingCycle === 'monthly' ? monthlyBtnRef.current : annualBtnRef.current;
+    if (!target) return;
+    const parent = target.offsetParent as HTMLElement | null;
+    if (!parent) return;
+    setIndicator({ left: target.offsetLeft, width: target.offsetWidth });
+  }, [billingCycle]);
 
   const handleSelectPlan = (planName: string) => {
     trackCTAClick(`Select plan: ${planName}`, 'pricing_section');
@@ -130,23 +143,30 @@ const PricingSection: React.FC = () => {
           className="flex justify-center mb-14"
         >
           <div className="relative inline-flex items-center p-1.5 bg-white border border-gray-200 rounded-full shadow-sm">
+            <motion.div
+              animate={{ left: indicator.left, width: indicator.width }}
+              transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+              className="absolute inset-y-1.5 bg-[#1a2332] rounded-full shadow-md"
+            />
             <button
+              ref={monthlyBtnRef}
               type="button"
               onClick={() => setBillingCycle('monthly')}
               className={`relative z-10 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 ${
                 billingCycle === 'monthly'
-                  ? 'text-[#1a2332]'
+                  ? 'text-white'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
               Monthly
             </button>
             <button
+              ref={annualBtnRef}
               type="button"
               onClick={() => setBillingCycle('annual')}
               className={`relative z-10 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 flex items-center gap-2 ${
                 billingCycle === 'annual'
-                  ? 'text-[#1a2332]'
+                  ? 'text-white'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -154,22 +174,13 @@ const PricingSection: React.FC = () => {
               <span
                 className={`text-xs font-bold px-2 py-0.5 rounded-full transition-colors duration-300 ${
                   billingCycle === 'annual'
-                    ? 'bg-[#1a2332] text-[#00d4ff]'
+                    ? 'bg-[#00d4ff] text-[#1a2332]'
                     : 'bg-[#00d4ff]/15 text-[#0099cc]'
                 }`}
               >
                 Save 25%
               </span>
             </button>
-            <motion.div
-              layout
-              transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-              className="absolute inset-y-1.5 bg-[#00d4ff]/20 border border-[#00d4ff]/40 rounded-full"
-              style={{
-                left: billingCycle === 'monthly' ? '0.375rem' : '50%',
-                right: billingCycle === 'monthly' ? '50%' : '0.375rem',
-              }}
-            />
           </div>
         </motion.div>
 

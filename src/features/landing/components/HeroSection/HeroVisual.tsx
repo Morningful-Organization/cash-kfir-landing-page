@@ -31,7 +31,7 @@ const HeroVisual = () => {
               <div className="bg-gradient-to-r from-[#00d4ff]/20 to-transparent p-4 rounded-xl border border-[#00d4ff]/20">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm text-gray-300">
-                    Cash Flow Analysis
+                    Cash Management
                   </span>
                   <span className="text-[#00d4ff] font-semibold">
                     $12.4M / month

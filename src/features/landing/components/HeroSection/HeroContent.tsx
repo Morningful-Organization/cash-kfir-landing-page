@@ -45,14 +45,14 @@ const HeroContent: React.FC = () => {
         </span>
         <br />
         <span className="bg-gradient-to-r from-[#00d4ff] to-[#0099cc] bg-clip-text text-transparent">
-          Company's Cash Flow
+          Company's Treasury
         </span>
       </h1>
 
       <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl">
-        Our intelligent money management app gives finance teams real-time
-        visibility into their cash flow, empowering smarter, data-driven
-        decisions for all operations.
+        Our intelligent treasury platform gives finance teams real-time
+        visibility across every account, empowering smarter, data-driven cash
+        management decisions.
       </p>
 
       <motion.div

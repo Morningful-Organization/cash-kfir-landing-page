@@ -7,7 +7,7 @@ import { useScrollAnimation } from '../../../shared/hooks/useAnimation';
 const SOLUTIONS_DATA = [
   {
     icon: Activity,
-    title: 'Cash Flow Management',
+    title: 'Cash Management',
     description:
       'Monitor inflows and outflows in real-time. Understand your cash conversion cycle and optimize working capital.',
     image: '/images/solutions/cash-flow-management.jpg',

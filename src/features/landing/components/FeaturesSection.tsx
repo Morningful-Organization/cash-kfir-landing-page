@@ -14,7 +14,7 @@ import {
 const FEATURES_DATA = [
   {
     icon: BarChart3,
-    title: 'Real-Time Cash Flow',
+    title: 'Real-Time Cash Management',
     bulletPoints: [
       'Real-Time Monitoring',
       'Multi-Account View', 
