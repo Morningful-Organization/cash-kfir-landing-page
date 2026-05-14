@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useAnalytics } from '../../hooks';
 
@@ -82,6 +83,11 @@ const Navigation: React.FC = () => {
     window.open('https://app.morningful.ai', '_blank');
   };
 
+  const handleRegisterClick = () => {
+    trackNavigation('Register for free');
+    window.open('https://app.morningful.ai', '_blank');
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,13 +124,23 @@ const Navigation: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <Button
               size="sm"
+              variant="ghost"
               onClick={handleSignInClick}
-              className="px-2 sm:px-6 bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] text-xs sm:text-sm rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00d4ff]/25"
+              className="px-2 sm:px-4 text-gray-700 hover:text-[#00d4ff] hover:bg-transparent text-xs sm:text-sm font-medium transition-colors duration-300"
             >
               Sign In
+            </Button>
+            <Button
+              size="sm"
+              onClick={handleRegisterClick}
+              className="group relative px-3 sm:px-6 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] text-[#1a2332] font-semibold text-xs sm:text-sm rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00d4ff]/40 overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Sparkles className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5" />
+              <span className="relative">Register for free</span>
             </Button>
           </div>
         </div>
