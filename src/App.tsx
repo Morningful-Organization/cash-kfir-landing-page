@@ -44,7 +44,7 @@ function App() {
         <FeaturesSection />
         <SolutionsSection />
         <TestimonialsSection />
-        <PricingSection />
+        <PricingSection onContactClick={contactHook.openModal} />
         <CTASection onContactClick={contactHook.openModal} />
         <ContactModal
           isOpen={contactHook.isModalOpen}

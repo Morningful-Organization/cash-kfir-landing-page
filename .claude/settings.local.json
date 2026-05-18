@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(npx react-scripts *)",
+      "PowerShell(Get-ChildItem node_modules\\\\.cache -ErrorAction SilentlyContinue | Select-Object Name; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime)",
+      "PowerShell(Test-Path node_modules\\\\.cache; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime; \\(Get-Item \"src\\\\App.tsx\"\\).LastWriteTime)"
     ]
   }
 }

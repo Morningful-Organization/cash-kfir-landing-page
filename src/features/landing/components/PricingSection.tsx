@@ -20,6 +20,16 @@ interface Plan {
 
 const PLANS: Plan[] = [
   {
+    name: 'Morningful Free',
+    tagline: 'Get started with the essentials',
+    monthlyPrice: 0,
+    annualMonthlyPrice: 0,
+    annualTotal: 0,
+    features: ['Connect bank accounts', 'Daily AI alerts'],
+    highlighted: false,
+    ctaLabel: 'Get started free',
+  },
+  {
     name: 'Morningful Pro',
     tagline: 'For finance teams who want deeper insight',
     monthlyPrice: 29.99,
@@ -58,7 +68,11 @@ const formatPrice = (value: number) =>
     maximumFractionDigits: 2,
   });
 
-const PricingSection: React.FC = () => {
+interface PricingSectionProps {
+  onContactClick?: () => void;
+}
+
+const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
   const { ref, isInView } = useScrollAnimation();
   const { trackCTAClick } = useAnalytics();
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('annual');
@@ -79,6 +93,11 @@ const PricingSection: React.FC = () => {
   const handleSelectPlan = (planName: string) => {
     trackCTAClick(`Select plan: ${planName}`, 'pricing_section');
     window.open('https://app.morningful.ai', '_blank');
+  };
+
+  const handleContactSalesClick = () => {
+    trackCTAClick('Contact Sales', 'pricing_section');
+    onContactClick?.();
   };
 
   return (
@@ -185,8 +204,9 @@ const PricingSection: React.FC = () => {
         </motion.div>
 
         {/* Plan cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {PLANS.map((plan, index) => {
+            const isFree = plan.monthlyPrice === 0;
             const displayPrice =
               billingCycle === 'annual'
                 ? plan.annualMonthlyPrice
@@ -251,7 +271,7 @@ const PricingSection: React.FC = () => {
                       </span>
                     </div>
                     <div className="h-6 mt-2 flex items-center text-sm">
-                      {billingCycle === 'annual' ? (
+                      {isFree ? null : billingCycle === 'annual' ? (
                         <span
                           className={
                             plan.highlighted ? 'text-gray-300' : 'text-gray-600'
@@ -281,7 +301,7 @@ const PricingSection: React.FC = () => {
                         : 'bg-[#00d4ff]/10 text-[#0099cc] border border-[#00d4ff]/20'
                     }`}
                   >
-                    14-day free trial
+                    {isFree ? 'No card required' : '14-day free trial'}
                   </div>
 
                   <Button
@@ -350,12 +370,13 @@ const PricingSection: React.FC = () => {
           className="text-center text-sm text-gray-500 mt-12"
         >
           Need a custom plan for your enterprise?{' '}
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={handleContactSalesClick}
             className="text-[#00d4ff] font-semibold hover:underline"
           >
             Contact our sales team
-          </a>
+          </button>
         </motion.p>
       </div>
     </section>
