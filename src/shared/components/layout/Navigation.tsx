@@ -84,7 +84,7 @@ const Navigation: React.FC = () => {
   };
 
   const handleRegisterClick = () => {
-    trackNavigation('Register for free');
+    trackNavigation('Register for free trial');
     window.open('https://app.morningful.ai', '_blank');
   };
 
@@ -140,7 +140,7 @@ const Navigation: React.FC = () => {
             >
               <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <Sparkles className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5" />
-              <span className="relative">Register for free</span>
+              <span className="relative">Register for free trial</span>
             </Button>
           </div>
         </div>

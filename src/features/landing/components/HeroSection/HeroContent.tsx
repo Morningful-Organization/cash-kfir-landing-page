@@ -9,7 +9,7 @@ const HeroContent: React.FC = () => {
   const { trackCTAClick } = useAnalytics();
 
   const handleRegister = () => {
-    trackCTAClick('Register for free', 'hero_section');
+    trackCTAClick('Register for free trial', 'hero_section');
     window.open('https://app.morningful.ai', '_blank');
   };
 
@@ -67,7 +67,7 @@ const HeroContent: React.FC = () => {
           className="group bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] text-[#1a2332] font-semibold px-8 py-4 h-auto text-lg rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00d4ff]/40"
         >
           <Sparkles className="mr-2 w-5 h-5" />
-          Register for free
+          Register for free trial
           <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
         <Button
