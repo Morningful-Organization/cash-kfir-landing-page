@@ -5,7 +5,15 @@
       "Bash(npx react-scripts *)",
       "PowerShell(Get-ChildItem node_modules\\\\.cache -ErrorAction SilentlyContinue | Select-Object Name; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime)",
       "PowerShell(Test-Path node_modules\\\\.cache; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime; \\(Get-Item \"src\\\\App.tsx\"\\).LastWriteTime)",
-      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,display_aspect_ratio -of default=noprint_wrappers=1 \"c:\\\\Morningful - Landing page\\\\public\\\\videos\\\\MorningfulVideovChatBot.mp4\")"
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,display_aspect_ratio -of default=noprint_wrappers=1 \"c:\\\\Morningful - Landing page\\\\public\\\\videos\\\\MorningfulVideovChatBot.mp4\")",
+      "Bash(ffmpeg -version)",
+      "PowerShell(choco install ffmpeg -y)",
+      "PowerShell(winget install Gyan.FFmpeg --accept-source-agreements --accept-package-agreements --silent --scope user)",
+      "PowerShell($env:Path = \"C:\\\\Users\\\\Stefa\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin;$env:Path\"; ffmpeg -version | Select-Object -First 1)",
+      "PowerShell($env:Path = \"C:\\\\Users\\\\Stefa\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin;$env:Path\"; Set-Location \"c:\\\\Morningful - Landing page\\\\public\\\\videos\"; ffmpeg -hide_banner -loglevel error -stats -i MorningfulVideov2.mp4 -c:v libx264 -crf 28 -preset slow -vf \"scale=-2:720\" -an -movflags +faststart -y MorningfulVideov2_opt.mp4)",
+      "PowerShell($env:Path = \"C:\\\\Users\\\\Stefa\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin;$env:Path\"; Set-Location \"c:\\\\Morningful - Landing page\\\\public\\\\videos\"; ffmpeg -hide_banner -loglevel error -stats -i MorningfulVideov2.mp4 -c:v libvpx-vp9 -crf 34 -b:v 0 -vf \"scale=-2:720\" -an -row-mt 1 -y MorningfulVideov2.webm)",
+      "PowerShell($env:Path = \"C:\\\\Users\\\\Stefa\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin;$env:Path\"; Set-Location \"c:\\\\Morningful - Landing page\\\\public\\\\videos\"; ffmpeg -hide_banner -loglevel error -i MorningfulVideov2.mp4 -vframes 1 -vf \"scale=-2:720\" -q:v 4 -y MorningfulVideov2-poster.jpg)",
+      "PowerShell($env:Path = \"C:\\\\Users\\\\Stefa\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin;$env:Path\"; Set-Location \"c:\\\\Morningful - Landing page\\\\public\\\\videos\"; ffmpeg -hide_banner -loglevel error -stats -i MorningfulVideovChatBotV2.mp4 -c:v libx264 -crf 28 -preset slow -vf \"scale=-2:720\" -an -movflags +faststart -y MorningfulVideovChatBotV2_opt.mp4)"
     ]
   }
 }

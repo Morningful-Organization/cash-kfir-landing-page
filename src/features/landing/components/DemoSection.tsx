@@ -108,6 +108,7 @@ const DemoSection: React.FC = () => {
               loop
               playsInline
               preload="metadata"
+              poster="/videos/MorningfulVideov2-poster.jpg"
               aria-label="Morningful dashboard demo"
             >
               <source src="/videos/MorningfulVideov2.mp4" type="video/mp4" />

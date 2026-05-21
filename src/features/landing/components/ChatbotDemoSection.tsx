@@ -4,7 +4,8 @@ import { Play, Pause, Bot, MessageSquare, Zap } from 'lucide-react';
 import { useScrollAnimation } from '../../../shared/hooks/useAnimation';
 
 const VIDEO_READY = true;
-const VIDEO_SRC = '/videos/MorningfulVideovChatBotV2.mp4';
+const VIDEO_SRC_MP4 = '/videos/MorningfulVideovChatBotV2.mp4';
+const VIDEO_POSTER = '/videos/MorningfulVideovChatBotV2-poster.jpg';
 
 const CHAT_HIGHLIGHTS = [
   {
@@ -138,9 +139,10 @@ const ChatbotDemoSection: React.FC = () => {
                     loop
                     playsInline
                     preload="metadata"
+                    poster={VIDEO_POSTER}
                     aria-label="Morningful chatbot demo"
                   >
-                    <source src={VIDEO_SRC} type="video/mp4" />
+                    <source src={VIDEO_SRC_MP4} type="video/mp4" />
                     Your browser does not support video playback.
                   </video>
 
