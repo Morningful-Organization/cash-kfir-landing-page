@@ -4,7 +4,8 @@
       "Bash(npx tsc *)",
       "Bash(npx react-scripts *)",
       "PowerShell(Get-ChildItem node_modules\\\\.cache -ErrorAction SilentlyContinue | Select-Object Name; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime)",
-      "PowerShell(Test-Path node_modules\\\\.cache; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime; \\(Get-Item \"src\\\\App.tsx\"\\).LastWriteTime)"
+      "PowerShell(Test-Path node_modules\\\\.cache; \\(Get-Item \"src\\\\features\\\\landing\\\\components\\\\PricingSection.tsx\"\\).LastWriteTime; \\(Get-Item \"src\\\\App.tsx\"\\).LastWriteTime)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,display_aspect_ratio -of default=noprint_wrappers=1 \"c:\\\\Morningful - Landing page\\\\public\\\\videos\\\\MorningfulVideovChatBot.mp4\")"
     ]
   }
 }

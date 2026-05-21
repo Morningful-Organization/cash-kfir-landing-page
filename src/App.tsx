@@ -2,9 +2,12 @@ import React from 'react';
 import { Layout, ErrorBoundary } from './shared/components';
 import {
   HeroSection,
+  DemoSection,
   StatsSection,
   FeaturesSection,
+  PlaidSecuritySection,
   SolutionsSection,
+  ChatbotDemoSection,
   TestimonialsSection,
   PricingSection,
   CTASection,
@@ -40,9 +43,12 @@ function App() {
         onTermsOfServiceClick={termsOfServiceHook.openModal}
       >
         <HeroSection />
+        <DemoSection />
         <StatsSection />
         <FeaturesSection />
+        <PlaidSecuritySection />
         <SolutionsSection />
+        <ChatbotDemoSection />
         <TestimonialsSection />
         <PricingSection onContactClick={contactHook.openModal} />
         <CTASection onContactClick={contactHook.openModal} />
