@@ -18,6 +18,7 @@ import {
   useApolloTracker,
   useAnalytics,
   useScrollTracking,
+  useGlobalClickTracking,
   useContact,
   usePrivacyPolicy,
   useTermsOfService,
@@ -34,6 +35,7 @@ function App() {
   useApolloTracker();
   useAnalytics();
   useScrollTracking();
+  useGlobalClickTracking();
 
   return (
     <ErrorBoundary>

@@ -222,6 +222,59 @@ class AnalyticsService {
       },
     });
   }
+
+  /**
+   * Track a click on the "Register for free trial" button.
+   * Records where the user is sent so we can see the conversion path.
+   */
+  trackRegisterClick(location: string, destination: string): void {
+    this.logEvent('register_click', {
+      event_category: 'conversion',
+      event_label: location,
+      custom_parameters: {
+        location,
+        destination,
+      },
+    });
+  }
+
+  /**
+   * Track a click on a link that leaves the landing page.
+   */
+  trackOutboundLink(url: string, label: string, location: string): void {
+    this.logEvent('outbound_link_click', {
+      event_category: 'outbound',
+      event_label: label,
+      custom_parameters: {
+        url,
+        label,
+        location,
+      },
+    });
+  }
+
+  /**
+   * Catch-all click tracking. Fired for every interactive element click
+   * captured by the global listener, so we get full coverage without having
+   * to instrument each element by hand.
+   */
+  trackAutoClick(params: {
+    label: string;
+    elementType: string;
+    section: string;
+    href?: string;
+  }): void {
+    this.logEvent('element_click', {
+      event_category: 'auto_click',
+      event_label: params.label,
+      custom_parameters: {
+        element_text: params.label,
+        element_type: params.elementType,
+        section: params.section,
+        ...(params.href ? { href: params.href } : {}),
+      },
+    });
+  }
 }
 
 // Export singleton instance

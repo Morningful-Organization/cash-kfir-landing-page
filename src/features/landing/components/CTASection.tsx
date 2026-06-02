@@ -11,10 +11,11 @@ interface CTASectionProps {
 
 const CTASection: React.FC<CTASectionProps> = ({ onContactClick }) => {
   const { ref, isInView } = useScrollAnimation();
-  const { trackCTAClick } = useAnalytics();
+  const { trackCTAClick, trackRegisterClick } = useAnalytics();
 
-  const handleSignInClick = () => {
-    trackCTAClick('Sign In', 'cta_section');
+  const handleRegisterClick = () => {
+    trackCTAClick('Start free trial', 'cta_section');
+    trackRegisterClick('cta_section', 'https://app.morningful.ai');
     window.open('https://app.morningful.ai', '_blank');
   };
 
@@ -95,10 +96,10 @@ const CTASection: React.FC<CTASectionProps> = ({ onContactClick }) => {
           >
             <Button
               size="lg"
-              onClick={handleSignInClick}
+              onClick={handleRegisterClick}
               className="bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] font-bold px-12 py-6 h-auto text-xl rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00d4ff]/25 group"
             >
-              Sign In
+              Start free trial
               <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
 

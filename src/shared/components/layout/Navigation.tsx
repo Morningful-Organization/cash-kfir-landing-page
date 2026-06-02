@@ -55,7 +55,7 @@ const LogoWordmark = () => {
 };
 
 const Navigation: React.FC = () => {
-  const { trackNavigation } = useAnalytics();
+  const { trackNavigation, trackRegisterClick } = useAnalytics();
 
   const navItems = [
     { label: 'Features', href: '#features' },
@@ -84,7 +84,8 @@ const Navigation: React.FC = () => {
   };
 
   const handleRegisterClick = () => {
-    trackNavigation('Register for free trial');
+    trackNavigation('Start free trial');
+    trackRegisterClick('navigation', 'https://app.morningful.ai');
     window.open('https://app.morningful.ai', '_blank');
   };
 
@@ -140,7 +141,7 @@ const Navigation: React.FC = () => {
             >
               <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <Sparkles className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5" />
-              <span className="relative">Register for free trial</span>
+              <span className="relative">Start free trial</span>
             </Button>
           </div>
         </div>

@@ -6,10 +6,11 @@ import { ANIMATION_VARIANTS } from '../../../../shared/constants/ui';
 import { useAnalytics } from '../../../../shared/hooks';
 
 const HeroContent: React.FC = () => {
-  const { trackCTAClick } = useAnalytics();
+  const { trackCTAClick, trackRegisterClick } = useAnalytics();
 
   const handleRegister = () => {
-    trackCTAClick('Register for free trial', 'hero_section');
+    trackCTAClick('Start free trial', 'hero_section');
+    trackRegisterClick('hero_section', 'https://app.morningful.ai');
     window.open('https://app.morningful.ai', '_blank');
   };
 
@@ -67,7 +68,7 @@ const HeroContent: React.FC = () => {
           className="group bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] text-[#1a2332] font-semibold px-8 py-4 h-auto text-lg rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00d4ff]/40"
         >
           <Sparkles className="mr-2 w-5 h-5" />
-          Register for free trial
+          Start free trial
           <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
         <Button
@@ -80,6 +81,15 @@ const HeroContent: React.FC = () => {
           Learn More
         </Button>
       </motion.div>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="text-sm text-gray-400"
+      >
+        No credit card required, 14 day free trial, full access.
+      </motion.p>
 
       {/* Trust indicators */}
       <motion.div
