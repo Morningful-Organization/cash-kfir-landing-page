@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls .github/workflows)",
+      "Bash(ls netlify.toml vercel.json firebase.json CNAME static.json)",
+      "Bash(curl -s -o /dev/null -w \"morningful.ai -> HTTP %{http_code}, redirects to: %{redirect_url}\\\\n\" -m 15 https://morningful.ai/)",
+      "Bash(curl -s -o /dev/null -w \"www.morningful.ai -> HTTP %{http_code}, redirects to: %{redirect_url}\\\\n\" -m 15 https://www.morningful.ai/)",
+      "Bash(curl -s -m 15 https://morningful.ai/robots.txt)",
+      "Bash(curl -s -m 15 -L https://morningful.ai/)"
+    ]
+  }
+}

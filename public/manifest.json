@@ -1,6 +1,7 @@
 {
   "short_name": "Morningful AI",
-  "name": "Morningful AI - Financial Management Platform",
+  "name": "Morningful AI - AI Treasury Management & Cash Flow Software",
+  "description": "Real-time cash visibility across every bank account, AI CFO insights, and smarter treasury decisions for finance teams.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#1a2332",
   "background_color": "#ffffff"
 }

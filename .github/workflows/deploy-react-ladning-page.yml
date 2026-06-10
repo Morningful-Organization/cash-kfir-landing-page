@@ -38,18 +38,28 @@ jobs:
           aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           aws configure set default.region "${{ secrets.AWS_REGION }}"
 
-      # Long cache for hashed assets; no-cache for index.html
+      # Long cache for hashed assets; no-cache for index.html; short cache for crawler files
       - name: Sync assets (long cache)
         run: |
           aws s3 sync ./${{ env.BUILD_DIR }}/ s3://${{ secrets.S3_BUCKET_NAME_PDN_LANDING }} \
             --delete \
             --exclude "index.html" \
+            --exclude "robots.txt" \
+            --exclude "sitemap.xml" \
+            --exclude "manifest.json" \
             --cache-control "public, max-age=31536000, immutable"
 
       - name: Upload index.html (no cache)
         run: |
           aws s3 cp ./${{ env.BUILD_DIR }}/index.html s3://${{ secrets.S3_BUCKET_NAME_PDN_LANDING }}/index.html \
             --cache-control "no-store, no-cache, must-revalidate, max-age=0"
+
+      - name: Upload crawler files (short cache)
+        run: |
+          for f in robots.txt sitemap.xml manifest.json; do
+            aws s3 cp ./${{ env.BUILD_DIR }}/$f s3://${{ secrets.S3_BUCKET_NAME_PDN_LANDING }}/$f \
+              --cache-control "public, max-age=3600"
+          done
 
       - name: Invalidate CloudFront
         run: |

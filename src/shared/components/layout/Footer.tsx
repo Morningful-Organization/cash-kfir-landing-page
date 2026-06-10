@@ -54,7 +54,7 @@ const Footer: React.FC<FooterProps> = ({
             <div className="mb-6">
               <img
                 src="/images/logos/transparent.png"
-                alt="Logo"
+                alt="Morningful AI logo"
                 className="h-20 sm:h-24 md:h-28 w-auto block"
               />
             </div>
