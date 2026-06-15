@@ -106,24 +106,28 @@ class AnalyticsService {
    * @param params - Additional parameters for the event
    */
   logEvent(eventName: string, params?: { [key: string]: any }): void {
+    // GA4 only captures flat, scalar params, nested objects are dropped. Lift any
+    // `custom_parameters` up to the top level so click context (section, element
+    // type, href, destination, etc.) is actually recorded instead of discarded.
+    const { custom_parameters, ...rest } = params || {};
+    const payload = {
+      app_name: 'morningful_landing_page',
+      ...rest,
+      ...(custom_parameters || {}),
+    };
+
     // Google Analytics tracking
     if (typeof window.gtag === 'function') {
-      window.gtag('event', eventName, {
-        app_name: 'morningful_landing_page',
-        ...params,
-      });
+      window.gtag('event', eventName, payload);
     }
 
     // Mixpanel tracking (only if not blocked)
     if (this.isMixpanelInitialized && !this.isCountryBlocked) {
-      mixpanel.track(eventName, {
-        app_name: 'morningful_landing_page',
-        ...params,
-      });
+      mixpanel.track(eventName, payload);
     }
 
     if (process.env.NODE_ENV === 'development') {
-      console.log('Analytics Event:', eventName, params);
+      console.log('Analytics Event:', eventName, payload);
     }
   }
 

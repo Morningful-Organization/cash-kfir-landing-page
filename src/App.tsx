@@ -3,17 +3,22 @@ import { Layout, ErrorBoundary } from './shared/components';
 import {
   HeroSection,
   DemoSection,
+  HowItWorksSection,
   StatsSection,
   FeaturesSection,
   PlaidSecuritySection,
+  HowWeUseAISection,
   SolutionsSection,
   ChatbotDemoSection,
   TestimonialsSection,
+  MeetTheTeamSection,
   PricingSection,
+  FAQSection,
   CTASection,
 } from './features/landing';
 import { ContactModal } from './features/contact';
 import { Chatbot } from './features/chatbot';
+import { PromoPopup } from './features/promo/PromoPopup';
 import {
   useApolloTracker,
   useAnalytics,
@@ -44,15 +49,19 @@ function App() {
         onPrivacyPolicyClick={privacyPolicyHook.openModal}
         onTermsOfServiceClick={termsOfServiceHook.openModal}
       >
-        <HeroSection />
+        <HeroSection onContactClick={contactHook.openModal} />
         <DemoSection />
+        <HowItWorksSection />
         <StatsSection />
         <FeaturesSection />
         <PlaidSecuritySection />
+        <HowWeUseAISection />
         <SolutionsSection />
         <ChatbotDemoSection />
         <TestimonialsSection />
+        <MeetTheTeamSection />
         <PricingSection onContactClick={contactHook.openModal} />
+        <FAQSection onContactClick={contactHook.openModal} />
         <CTASection onContactClick={contactHook.openModal} />
         <ContactModal
           isOpen={contactHook.isModalOpen}
@@ -69,6 +78,7 @@ function App() {
           onClose={termsOfServiceHook.closeModal}
         />
         <Chatbot />
+        <PromoPopup onBookDemo={contactHook.openModal} />
       </Layout>
     </ErrorBoundary>
   );

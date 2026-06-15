@@ -96,41 +96,25 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', duration: 0.5 }}
-            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-4xl bg-surface rounded-2xl sm:rounded-3xl shadow-card-lg overflow-hidden max-h-[90vh] flex flex-col"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#1a2332] to-[#0f1419] text-white p-4 sm:p-6 md:p-8 relative overflow-hidden flex-shrink-0">
-              <div className="absolute inset-0">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 90, 0],
-                    opacity: [0.1, 0.2, 0.1],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-[#00d4ff] to-transparent rounded-full blur-2xl"
-                />
-              </div>
-
-              <div className="relative flex justify-between items-start">
+            <div className="bg-surface text-ink p-4 sm:p-6 md:p-8 border-b border-border flex-shrink-0">
+              <div className="flex justify-between items-start">
                 <div className="flex-1 pr-2">
                   <h2
                     id="modal-title"
-                    className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2"
+                    className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-ink mb-1 sm:mb-2"
                   >
                     Morningful Privacy Policy
                   </h2>
                   <p
                     id="modal-description"
-                    className="text-gray-300 text-sm sm:text-base"
+                    className="text-ink-soft text-sm sm:text-base"
                   >
                     How we collect, use, and protect your information
                   </p>
@@ -138,7 +122,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                 <button
                   ref={firstFocusableRef}
                   onClick={onClose}
-                  className="p-2 sm:p-3 hover:bg-white/10 rounded-full transition-colors duration-200 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className="p-2 sm:p-3 text-ink-soft hover:bg-surface-muted hover:text-ink rounded-full transition-colors duration-200 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
                   aria-label="Close modal"
                   type="button"
                 >
@@ -149,15 +133,15 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8">
-              <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 leading-relaxed">
+              <div className="prose prose-sm sm:prose-base max-w-none text-ink-soft leading-relaxed">
                 <div className="space-y-6">
                   <div>
-                    <p className="text-gray-600 text-sm">
+                    <p className="font-mono text-ink-soft text-sm">
                       Last Updated: September 5, 2025
                     </p>
                   </div>
 
-                  <div className="prose prose-gray max-w-none">
+                  <div className="prose max-w-none text-ink-soft">
                     <p className="mb-4">
                       Morningful Inc. ("Morningful", "we", "us" or "our") highly
                       values and respects your privacy. This privacy policy
@@ -176,7 +160,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       available{' '}
                       <button
                         onClick={onTermsOfServiceClick}
-                        className="text-blue-600 hover:text-blue-800 underline cursor-pointer bg-transparent border-none p-0 font-inherit"
+                        className="text-brand hover:text-brand-secondary underline cursor-pointer bg-transparent border-none p-0"
                         type="button"
                       >
                         here
@@ -212,8 +196,8 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       Privacy Policy will appear on the Site at all times.
                     </p>
 
-                    <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500 my-6">
-                      <p className="font-semibold text-gray-800">
+                    <div className="bg-surface-muted p-4 rounded-lg border-l-4 border-brand my-6">
+                      <p className="font-semibold text-ink">
                         PLEASE READ THIS PRIVACY POLICY CAREFULLY BEFORE USING
                         THE SITE AND SERVICES. IF YOU DO NOT AGREE TO THIS
                         PRIVACY POLICY YOU MAY NOT ACCESS OR OTHERWISE USE OUR
@@ -221,7 +205,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       </p>
                     </div>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       1. WHAT INFORMATION DO WE COLLECT AND HOW DO WE COLLECT
                       IT?
                     </h2>
@@ -267,7 +251,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                           processes data visit:{' '}
                           <a
                             href="https://policies.google.com/privacy/partners"
-                            className="text-blue-600 hover:text-blue-800 underline"
+                            className="text-brand hover:text-brand-secondary underline"
                           >
                             https://policies.google.com/privacy/partners
                           </a>
@@ -325,8 +309,8 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                           combined with additional non-identifiable information
                           collected from other sources, regarding the use of the
                           Services. This information will be anonymous and will
-                          not allow, by reasonable means, to identify – or to be
-                          attributed to – a specific user. We will use this
+                          not allow, by reasonable means, to identify, or to be
+                          attributed to, a specific user. We will use this
                           information for the purposes of internal research and
                           development, and we also may share it with our
                           business partners, affiliates or other third parties
@@ -340,7 +324,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       </div>
                     </div>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       2. HOW WILL THE INFORMATION BE USED?
                     </h2>
                     <p className="mb-4">
@@ -399,7 +383,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       </div>
                     </div>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       3. TRANSFER OF INFORMATION TO THIRD PARTIES
                     </h2>
                     <p className="mb-4">
@@ -493,7 +477,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       </div>
                     </div>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       4. ADVERTISEMENTS AND DIRECT MAIL
                     </h2>
                     <p className="mb-4">
@@ -517,7 +501,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       your consent.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       5. YOUR RIGHTS
                     </h2>
                     <p className="mb-6">
@@ -532,7 +516,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       laws and regulations.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       6. EXTERNAL LINKS AND THIRD-PARTY SERVICES
                     </h2>
                     <p className="mb-4">
@@ -554,7 +538,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       OF ANY THIRD PARTIES.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       7. INFORMATION SECURITY
                     </h2>
                     <p className="mb-4">
@@ -583,7 +567,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       below.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       8. PROTECTION OF CHILDREN'S PRIVACY
                     </h2>
                     <p className="mb-2">
@@ -604,7 +588,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       to delete such information.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       9. GOVERNING LAW AND JURISDICTION
                     </h2>
                     <p className="mb-6">
@@ -614,7 +598,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       jurisdiction of the courts of Tel-Aviv, Israel.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       10. CHANGES TO THE PRIVACY POLICY
                     </h2>
                     <p className="mb-4">
@@ -637,7 +621,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       binding on you.
                     </p>
 
-                    <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">
+                    <h2 className="font-display text-xl font-semibold text-ink mt-8 mb-4">
                       11. CONTACT
                     </h2>
                     <p className="mb-4">
@@ -645,7 +629,7 @@ const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                       Privacy Policy, you are welcome to send us an email via{' '}
                       <a
                         href="mailto:admin@morningful.ai"
-                        className="text-blue-600 hover:text-blue-800 underline"
+                        className="text-brand hover:text-brand-secondary underline"
                       >
                         admin@morningful.ai
                       </a>{' '}

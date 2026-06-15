@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '../../../shared/components/ui/Button';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Star, Quote } from 'lucide-react';
+import { SectionHeading } from '../../../shared/components/ui/SectionHeading';
 import { useScrollAnimation } from '../../../shared/hooks/useAnimation';
-import { useAnalytics } from '../../../shared/hooks';
 
+// Real customers only. Add more here (with photo, role, company, and an
+// outcome metric where possible) to strengthen this section over time.
 const TESTIMONIALS_DATA = [
   {
     name: 'Ido Genosar',
@@ -13,6 +14,7 @@ const TESTIMONIALS_DATA = [
     avatar: '/images/avatars/ido.jpg',
     content:
       "Morningful more than pays for itself. We've streamlined cash management and earned 9X more in interest.",
+    metric: { value: '9X', label: 'more interest earned' },
     rating: 5,
   },
   {
@@ -26,142 +28,98 @@ const TESTIMONIALS_DATA = [
   },
 ];
 
+// Companies whose finance teams use Morningful (real customers).
+const CUSTOMER_NAMES = ['Verobotics', 'Zoma'];
+
 const TestimonialsSection = () => {
-  const { trackFeatureInteraction } = useAnalytics();
-  const [currentIndex, setCurrentIndex] = useState(0);
   const { ref, isInView } = useScrollAnimation();
 
-  const nextTestimonial = () => {
-    trackFeatureInteraction('testimonials', 'next_testimonial');
-    setCurrentIndex(prev => (prev + 1) % TESTIMONIALS_DATA.length);
-  };
-
-  const prevTestimonial = () => {
-    trackFeatureInteraction('testimonials', 'prev_testimonial');
-    setCurrentIndex(
-      prev => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length
-    );
-  };
-
-  const handleDotClick = (index: number) => {
-    trackFeatureInteraction('testimonials', `dot_click_${index}`);
-    setCurrentIndex(index);
-  };
-
   return (
-    <section
-      id="testimonials"
-      ref={ref}
-      className="py-24 bg-gradient-to-br from-[#1a2332] to-[#0f1419] text-white relative overflow-hidden"
-    >
-      {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-[#00d4ff]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#00d4ff]/3 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="testimonials" ref={ref} className="bg-surface py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Trusted by Forward-Thinking
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#0099cc]">
-              {' '}
-              CFOs
-            </span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Hear from finance leaders who have transformed their operations with
-            our platform.
-          </p>
+          <SectionHeading
+            eyebrow="Customers"
+            title="Finance leaders who run their day on Morningful"
+            description="From treasury to the founder's desk, teams rely on Morningful for a clear read on cash every morning."
+            align="left"
+          />
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-              className="text-center"
+        {/* Trusted-by names */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3"
+        >
+          <span className="font-mono text-xs uppercase tracking-eyebrow text-ink-soft">
+            Trusted by finance teams at
+          </span>
+          {CUSTOMER_NAMES.map(name => (
+            <span
+              key={name}
+              className="font-display text-xl font-semibold text-ink"
             >
-              <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-8 lg:p-12 shadow-2xl">
-                <div className="flex justify-center mb-6">
-                  {[...Array(TESTIMONIALS_DATA[currentIndex].rating)].map(
-                    (_, i) => (
-                      <Star
-                        key={`rating-star-${i}`}
-                        className="w-6 h-6 text-[#00d4ff] fill-current"
-                      />
-                    )
-                  )}
+              {name}
+            </span>
+          ))}
+        </motion.div>
+
+        {/* Both testimonials, visible at once */}
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {TESTIMONIALS_DATA.map((t, i) => (
+            <motion.figure
+              key={t.name}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+              className="flex flex-col rounded-2xl border border-border bg-surface p-7 shadow-card sm:p-8"
+            >
+              <Quote className="h-8 w-8 text-brand/30" aria-hidden="true" />
+
+              <blockquote className="mt-5 font-display text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl">
+                {t.content}
+              </blockquote>
+
+              {t.metric && (
+                <div className="mt-6 inline-flex w-fit items-baseline gap-2 rounded-lg bg-brand/5 px-4 py-2.5">
+                  <span className="font-display text-3xl font-semibold text-brand tabular-figures">
+                    {t.metric.value}
+                  </span>
+                  <span className="text-sm text-ink-soft">{t.metric.label}</span>
                 </div>
+              )}
 
-                <blockquote className="text-2xl lg:text-3xl font-medium text-white mb-8 leading-relaxed">
-                  "{TESTIMONIALS_DATA[currentIndex].content}"
-                </blockquote>
-
-                <div className="flex items-center justify-center space-x-4">
-                  <img
-                    src={TESTIMONIALS_DATA[currentIndex].avatar}
-                    alt={`${TESTIMONIALS_DATA[currentIndex].name}, ${TESTIMONIALS_DATA[currentIndex].role} at ${TESTIMONIALS_DATA[currentIndex].company}`}
-                    className="w-16 h-16 rounded-full border-2 border-[#00d4ff]/50"
-                  />
-                  <div className="text-left">
-                    <div className="font-bold text-white text-lg">
-                      {TESTIMONIALS_DATA[currentIndex].name}
-                    </div>
-                    <div className="text-[#00d4ff]">
-                      {TESTIMONIALS_DATA[currentIndex].role}
-                    </div>
-                    <div className="text-gray-300 text-sm">
-                      {TESTIMONIALS_DATA[currentIndex].company}
-                    </div>
+              <figcaption className="mt-auto flex items-center gap-4 border-t border-border pt-6">
+                <img
+                  src={t.avatar}
+                  alt={`${t.name}, ${t.role} at ${t.company}`}
+                  className="h-12 w-12 rounded-full object-cover ring-1 ring-border"
+                  loading="lazy"
+                />
+                <div>
+                  <div className="font-medium text-ink">{t.name}</div>
+                  <div className="text-sm text-ink-soft">
+                    {t.role}, {t.company}
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation */}
-          <div className="flex justify-center mt-8 space-x-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevTestimonial}
-              className="w-12 h-12 rounded-full border-white/20 text-white hover:bg-white/10 hover:border-[#00d4ff] hover:text-[#00d4ff]"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-
-            <div className="flex space-x-2 items-center">
-              {TESTIMONIALS_DATA.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleDotClick(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? 'bg-[#00d4ff] scale-125'
-                      : 'bg-white/30 hover:bg-white/50'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={nextTestimonial}
-              className="w-12 h-12 rounded-full border-white/20 text-white hover:bg-white/10 hover:border-[#00d4ff] hover:text-[#00d4ff]"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
-          </div>
+                <div className="ml-auto flex items-center gap-0.5">
+                  {[...Array(t.rating)].map((_, s) => (
+                    <Star
+                      key={`${t.name}-star-${s}`}
+                      className="h-4 w-4 fill-amber-400 text-amber-400"
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+              </figcaption>
+            </motion.figure>
+          ))}
         </div>
       </div>
     </section>

@@ -19,29 +19,30 @@ const StatsSection = () => {
   return (
     <section
       ref={ref}
-      className="py-16 bg-gradient-to-r from-gray-50 to-white border-b border-gray-100"
+      className="border-b border-border bg-surface-muted py-20 lg:py-24"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <motion.dl
           variants={stagger.container}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="grid grid-cols-2 gap-y-12 sm:gap-x-8 md:grid-cols-4 md:divide-x md:divide-border"
         >
-          {STATS_DATA.map((stat, index) => (
+          {STATS_DATA.map(stat => (
             <motion.div
               key={stat.label}
               variants={stagger.item}
-              whileHover={{ scale: 1.05 }}
-              className="text-center group transition-transform duration-300"
+              className="px-2 text-left md:px-8 md:first:pl-0"
             >
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1a2332] to-[#00d4ff] mb-2">
+              <dd className="font-mono text-4xl font-medium tracking-tight text-ink tabular-figures lg:text-5xl">
                 {stat.value}
-              </div>
-              <div className="text-gray-600 font-medium">{stat.label}</div>
+              </dd>
+              <dt className="mt-3 font-mono text-xs uppercase tracking-eyebrow text-ink-soft">
+                {stat.label}
+              </dt>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.dl>
       </div>
     </section>
   );

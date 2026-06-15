@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useAnalytics } from '../../hooks';
+import { APP_CONFIG } from '../../config/environment';
+
+interface NavigationProps {
+  onContactClick?: () => void;
+}
 
 const LogoWordmark = () => {
   const [wordmarkWidth, setWordmarkWidth] = useState<number | null>(null);
@@ -24,7 +28,6 @@ const LogoWordmark = () => {
         boldImage.onload = updateWidth;
       }
 
-      // Update on resize
       const resizeObserver = new ResizeObserver(updateWidth);
       resizeObserver.observe(boldImage);
 
@@ -36,37 +39,40 @@ const LogoWordmark = () => {
 
   return (
     <div
-      className="relative h-5 sm:h-6 lg:h-7 flex-shrink-0"
+      className="relative h-4 sm:h-5 flex-shrink-0"
       style={{ width: wordmarkWidth ? `${wordmarkWidth}px` : 'auto' }}
     >
       <img
         ref={boldImageRef}
         src="/images/logos/logo-main-bold.png"
         alt="Morningful AI"
-        className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
-      />
-      <img
-        src="/images/logos/logo-main-cyan.png"
-        alt="Morningful AI"
-        className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="absolute inset-0 h-full w-full object-contain"
       />
     </div>
   );
 };
 
-const Navigation: React.FC = () => {
-  const { trackNavigation, trackRegisterClick } = useAnalytics();
+const Navigation: React.FC<NavigationProps> = ({ onContactClick }) => {
+  const { trackNavigation, trackRegisterClick, trackCTAClick } = useAnalytics();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const navItems = [
     { label: 'Features', href: '#features' },
+    { label: 'How we use AI', href: '#how-we-use-ai' },
     { label: 'Solutions', href: '#solutions' },
-    { label: 'Resources', href: '#testimonials' },
+    { label: 'Team', href: '#meet-the-team' },
     { label: 'Pricing', href: '#pricing' },
   ];
 
   const handleNavClick = (item: { label: string; href: string }) => {
     trackNavigation(item.label);
-    // Smooth scroll to section
     const element = document.querySelector(item.href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -80,70 +86,77 @@ const Navigation: React.FC = () => {
 
   const handleSignInClick = () => {
     trackNavigation('Sign In');
-    window.open('https://app.morningful.ai', '_blank');
+    window.open(APP_CONFIG.APP_URL, '_blank');
+  };
+
+  const handleDemoClick = () => {
+    trackCTAClick('Book a demo', 'navigation');
+    onContactClick?.();
   };
 
   const handleRegisterClick = () => {
     trackNavigation('Start free trial');
-    trackRegisterClick('navigation', 'https://app.morningful.ai');
-    window.open('https://app.morningful.ai', '_blank');
+    trackRegisterClick('navigation', APP_CONFIG.APP_URL);
+    window.open(APP_CONFIG.APP_URL, '_blank');
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          <div className="flex items-center space-x-4 sm:space-x-8">
-            <button
-              className="flex items-center space-x-2 sm:space-x-3 group flex-shrink-0"
-              onClick={handleLogoClick}
-            >
-              <div className="relative h-8 sm:h-10 lg:h-12 flex-shrink-0">
-                <img
-                  src="/images/logos/logo-icon-blue.svg"
-                  alt="Morningful AI Logo"
-                  className="h-8 sm:h-10 lg:h-12 w-auto block shadow-lg transition-opacity duration-300 group-hover:opacity-0"
-                />
-                <img
-                  src="/images/logos/logo-icon-cyan.svg"
-                  alt="Morningful AI Logo"
-                  className="absolute inset-0 h-full w-full object-contain shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                />
-              </div>
-              <LogoWordmark />
-            </button>
-            <div className="hidden xl:flex space-x-8">
-              {navItems.map(item => (
-                <button
-                  key={item.label}
-                  className="relative group text-gray-700 font-medium hover:text-[#00d4ff] transition-colors duration-300"
-                  onClick={() => handleNavClick(item)}
-                >
-                  {item.label}
-                  <span className="w-0 h-0.5 bg-[#00d4ff] absolute -bottom-1 left-0 group-hover:w-full transition-all duration-300"></span>
-                </button>
-              ))}
-            </div>
+    <nav className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4 sm:px-4">
+      <div
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-full border border-border bg-surface/90 py-2 pl-5 pr-2 backdrop-blur-md transition-shadow duration-300 sm:py-2.5 sm:pl-6 sm:pr-2.5 ${
+          scrolled ? 'shadow-card-lg' : 'shadow-card'
+        }`}
+      >
+        <div className="flex items-center gap-6 xl:gap-8">
+          <button
+            className="flex flex-shrink-0 items-center gap-2 sm:gap-2.5"
+            onClick={handleLogoClick}
+            aria-label="Morningful AI home"
+          >
+            <img
+              src="/images/logos/logo-icon-blue.svg"
+              alt="Morningful AI"
+              className="h-7 w-auto sm:h-8"
+            />
+            <LogoWordmark />
+          </button>
+          <div className="hidden items-center gap-7 xl:flex">
+            {navItems.map(item => (
+              <button
+                key={item.label}
+                className="group relative text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-brand"
+                onClick={() => handleNavClick(item)}
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand transition-all duration-300 group-hover:w-full" />
+              </button>
+            ))}
           </div>
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={handleSignInClick}
-              className="px-2 sm:px-4 text-gray-700 hover:text-[#00d4ff] hover:bg-transparent text-xs sm:text-sm font-medium transition-colors duration-300"
-            >
-              Sign In
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleRegisterClick}
-              className="group relative px-3 sm:px-6 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] text-[#1a2332] font-semibold text-xs sm:text-sm rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00d4ff]/40 overflow-hidden"
-            >
-              <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <Sparkles className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-1.5" />
-              <span className="relative">Start free trial</span>
-            </Button>
-          </div>
+        </div>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleSignInClick}
+            className="hidden rounded-full sm:inline-flex"
+          >
+            Sign In
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleDemoClick}
+            className="hidden rounded-full lg:inline-flex"
+          >
+            Book a demo
+          </Button>
+          <Button
+            size="sm"
+            onClick={handleRegisterClick}
+            className="rounded-full"
+          >
+            Start free trial
+          </Button>
         </div>
       </div>
     </nav>

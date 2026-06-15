@@ -101,34 +101,18 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
             aria-describedby="modal-description"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#1a2332] to-[#0f1419] text-white p-4 sm:p-6 md:p-8 relative overflow-hidden flex-shrink-0">
-              <div className="absolute inset-0">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 90, 0],
-                    opacity: [0.1, 0.2, 0.1],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-[#00d4ff] to-transparent rounded-full blur-2xl"
-                />
-              </div>
-
-              <div className="relative flex justify-between items-start">
+            <div className="bg-surface-muted text-ink p-4 sm:p-6 md:p-8 border-b border-border flex-shrink-0">
+              <div className="flex justify-between items-start">
                 <div className="flex-1 pr-2">
                   <h2
                     id="modal-title"
-                    className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2"
+                    className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink mb-1 sm:mb-2"
                   >
                     Morningful Terms of Service
                   </h2>
                   <p
                     id="modal-description"
-                    className="text-gray-300 text-sm sm:text-base"
+                    className="text-ink-soft text-sm sm:text-base"
                   >
                     Terms and conditions for using our services
                   </p>
@@ -136,7 +120,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                 <button
                   ref={firstFocusableRef}
                   onClick={onClose}
-                  className="p-2 sm:p-3 hover:bg-white/10 rounded-full transition-colors duration-200 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className="p-2 sm:p-3 text-ink-soft hover:bg-ink/5 hover:text-ink rounded-full transition-colors duration-200 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-brand"
                   aria-label="Close modal"
                   type="button"
                 >
@@ -147,9 +131,9 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8">
-              <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 leading-relaxed">
+              <div className="prose prose-sm sm:prose-base max-w-none text-ink-soft leading-relaxed">
                 <div className="mb-6">
-                  <p className="text-gray-600 text-sm mb-4">July 9 2025</p>
+                  <p className="font-mono text-ink-soft text-sm mb-4">July 9 2025</p>
 
                   <p className="mb-4">
                     These Morningful Terms of Service (this "
@@ -185,8 +169,8 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                     Agreement in accordance with Section 12 (Modifications).
                   </p>
 
-                  <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500 my-6">
-                    <p className="font-semibold text-gray-800">
+                  <div className="bg-surface-muted p-4 rounded-lg border-l-4 border-brand my-6">
+                    <p className="font-semibold text-ink">
                       BY INDICATING YOUR ACCEPTANCE OF THIS AGREEMENT OR
                       ACCESSING OR USING THE PLATFORM, YOU ARE AGREEING TO BE
                       BOUND BY ALL TERMS, CONDITIONS AND NOTICES CONTAINED OR
@@ -200,7 +184,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
 
                 <hr className="my-6" />
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4">
+                <h2 className="text-xl font-bold text-ink mb-4">
                   1. MORNINGFUL PLATFORM
                 </h2>
 
@@ -209,7 +193,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   accounts, as further described below and in the Documentation.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.1. Overview
                 </h3>
                 <p className="mb-4">
@@ -232,7 +216,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Sources and Destinations.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.2. Definitions
                 </h3>
 
@@ -304,7 +288,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.3. Provision of the Platform
                 </h3>
                 <p className="mb-4">
@@ -316,7 +300,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Platform as specified in the applicable Order Form.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.4. Access to the Platform
                 </h3>
                 <p className="mb-4">
@@ -336,7 +320,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   at{' '}
                   <a
                     href="https://Morningful.ai/privacy-policy"
-                    className="text-blue-600 hover:text-blue-800 underline"
+                    className="text-brand hover:text-brand-secondary underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -349,7 +333,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   through its accounts.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.5. Use Restrictions
                 </h3>
                 <p className="mb-4">
@@ -370,7 +354,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   information regarding the Platform.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.6. Storage and Processing of Customer Data
                 </h3>
                 <p className="mb-4">
@@ -388,7 +372,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Destinations as part of the Platform.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1.7. Data Protection Addendum
                 </h3>
                 <p className="mb-4">
@@ -396,11 +380,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Protection Addendum attached as Exhibit B.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   2. SERVICE PLANS AND BETA RELEASES
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   2.1. Platform Plans
                 </h3>
                 <p className="mb-4">
@@ -414,7 +398,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   specified on the applicable Order Form.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   2.2. Paid Plans
                 </h3>
                 <p className="mb-4">
@@ -430,7 +414,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   periods).
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   2.3. Beta Releases
                 </h3>
                 <p className="mb-4">
@@ -455,11 +439,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </strong>
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   3. CUSTOMER OBLIGATIONS
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3.1. Data Collection
                 </h3>
                 <p className="mb-4">
@@ -476,7 +460,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   the Platform.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3.2. Rights in Customer Data
                 </h3>
                 <p className="mb-4">
@@ -509,7 +493,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   to the providers of Customer's Sources and Destinations.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3.3. No Sensitive Personal Information
                 </h3>
                 <p className="mb-4">
@@ -524,7 +508,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   herein.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3.4. Indemnification by Customer
                 </h3>
                 <p className="mb-4">
@@ -544,7 +528,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   reasonable out-of-pocket costs).
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   4. SECURITY
                 </h2>
                 <p className="mb-4">
@@ -558,11 +542,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   beyond Morningful's control.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   5. OWNERSHIP
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   5.1. Customer Data
                 </h3>
                 <p className="mb-4">
@@ -577,7 +561,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Subscription Term.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   5.2. Morningful Technology
                 </h3>
                 <p className="mb-4">
@@ -597,7 +581,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Platform or any Morningful technology are granted to Customer.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   5.3. Feedback
                 </h3>
                 <p className="mb-4">
@@ -612,11 +596,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Feedback into Morningful products and services.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   6. FEES & PAYMENT
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   6.1. Fees and Payment
                 </h3>
                 <p className="mb-4">
@@ -637,7 +621,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   less.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   6.2. Taxes
                 </h3>
                 <p className="mb-4">
@@ -658,7 +642,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   withholding had been required.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   6.3. Overages
                 </h3>
                 <p className="mb-4">
@@ -670,11 +654,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   arrears.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   7. TERM AND TERMINATION
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7.1. Term
                 </h3>
                 <p className="mb-4">
@@ -683,7 +667,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Subscription Terms.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7.2. Termination for Cause
                 </h3>
                 <p className="mb-4">
@@ -699,7 +683,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   dismissed within sixty (60) days thereafter).
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7.3. Suspension of Platform
                 </h3>
                 <p className="mb-4">
@@ -720,7 +704,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   the issue requiring suspension.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7.4. Effect of Termination
                 </h3>
                 <p className="mb-4">
@@ -748,7 +732,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   under this Agreement, by law or otherwise.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7.5. Survival
                 </h3>
                 <p className="mb-4">
@@ -761,7 +745,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Information), 12 (Modifications) and 13 (General Terms).
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   8. WARRANTY DISCLAIMER
                 </h2>
                 <p className="mb-4">
@@ -801,11 +785,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </span>
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   9. Limitation of Remedies and Damages
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   9.1. Consequential Damages Waiver
                 </h3>
                 <p className="mb-4">
@@ -820,7 +804,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </span>
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   9.2. Liability Cap
                 </h3>
                 <p className="mb-4">
@@ -833,7 +817,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </span>
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   9.3. Excluded Claims
                 </h3>
                 <p className="mb-4">
@@ -845,7 +829,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Section 3.4 (Indemnification by Customer).
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   9.4. Nature of Claims and Failure of Essential Purpose
                 </h3>
                 <p className="mb-4">
@@ -857,7 +841,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   failed of its essential purpose.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   10. CONFIDENTIAL INFORMATION
                 </h2>
                 <p className="mb-4">
@@ -909,7 +893,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   other remedies it might have at law.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   11. CO-MARKETING
                 </h2>
                 <p className="mb-4">
@@ -921,11 +905,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   customer of Morningful.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   12. MODIFICATIONS
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   12.1. Modifications to this Agreement
                 </h3>
                 <p className="mb-4">
@@ -963,7 +947,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   12.2. Changes to Policies
                 </h3>
                 <p className="mb-4">
@@ -978,11 +962,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   (Modifications to this Agreement) will not apply.
                 </p>
 
-                <h2 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+                <h2 className="text-xl font-bold text-ink mb-4 mt-8">
                   13. GENERAL TERMS
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.1. Assignment
                 </h3>
                 <p className="mb-4">
@@ -997,7 +981,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   authorized under this Section 13.1 will be null and void.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.2. Severability
                 </h3>
                 <p className="mb-4">
@@ -1008,7 +992,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   effect.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.3. Governing Law; Jurisdiction and Venue
                 </h3>
                 <p className="mb-4">
@@ -1021,7 +1005,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   to the personal jurisdiction of such courts.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.4. Attorneys' Fees and Costs
                 </h3>
                 <p className="mb-4">
@@ -1030,7 +1014,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   connection with such action.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.5. Notice
                 </h3>
                 <p className="mb-4">
@@ -1050,7 +1034,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   the other party.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.6. Morningful Contact Information
                 </h3>
                 <p className="mb-4">
@@ -1061,7 +1045,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Trl Tsur 33 Even Yehuda, Israel
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.7. Waivers
                 </h3>
                 <p className="mb-4">
@@ -1071,7 +1055,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   representative on behalf of the party claimed to have waived.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.8. Entire Agreement; Interpretation
                 </h3>
                 <p className="mb-4">
@@ -1092,7 +1076,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   applicable Documentation accordingly.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.9. Force Majeure
                 </h3>
                 <p className="mb-4">
@@ -1107,7 +1091,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   a license by a government agency.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.10. Subcontractors
                 </h3>
                 <p className="mb-4">
@@ -1121,7 +1105,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Platform as required under this Agreement.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.11. Subpoenas
                 </h3>
                 <p className="mb-4">
@@ -1131,7 +1115,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   efforts to notify Customer where permitted to do so.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.12. Independent Contractors
                 </h3>
                 <p className="mb-4">
@@ -1143,7 +1127,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   other party's prior written consent.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.13. Export Control
                 </h3>
                 <p className="mb-4">
@@ -1161,7 +1145,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   restriction.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   13.14. Government End-Users
                 </h3>
                 <p className="mb-4">
@@ -1176,13 +1160,13 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   use is prohibited.
                 </p>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
-                <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">
+                <h2 className="font-display text-xl font-bold text-ink mb-6 text-center">
                   Exhibit A – INFORMATION SECURITY POLICY
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   Introduction
                 </h3>
                 <p className="mb-6">
@@ -1196,7 +1180,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   27001, 27017 and 27018.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1. Customer Data and Management
                 </h3>
                 <p className="mb-4">
@@ -1238,7 +1222,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   2. Data Encryption
                 </h3>
                 <p className="mb-4">
@@ -1262,7 +1246,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3. Network Security, Physical Security and Environmental
                   Controls
                 </h3>
@@ -1290,7 +1274,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                     Detailed information about AWS security is available at{' '}
                     <a
                       href="https://aws.amazon.com/security/"
-                      className="text-blue-600 hover:text-blue-800 underline"
+                      className="text-brand hover:text-brand-secondary underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -1299,7 +1283,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                     and{' '}
                     <a
                       href="http://aws.amazon.com/security/sharing-the-security-responsibility/"
-                      className="text-blue-600 hover:text-blue-800 underline"
+                      className="text-brand hover:text-brand-secondary underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -1308,7 +1292,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                     . For AWS SOC Reports, please see{' '}
                     <a
                       href="https://aws.amazon.com/compliance/soc-faqs/"
-                      className="text-blue-600 hover:text-blue-800 underline"
+                      className="text-brand hover:text-brand-secondary underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -1317,7 +1301,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                     . Detailed information about GCS security is available at{' '}
                     <a
                       href="https://cloud.google.com/docs/tutorials#security"
-                      className="text-blue-600 hover:text-blue-800 underline"
+                      className="text-brand hover:text-brand-secondary underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -1332,7 +1316,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   4. Independent Security Assessments
                 </h3>
                 <p className="mb-4">
@@ -1360,7 +1344,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   5. Incident Response
                 </h3>
                 <p className="mb-4">
@@ -1410,7 +1394,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   6. Business Continuity Management
                 </h3>
                 <div className="mb-6 ml-4 space-y-3">
@@ -1425,7 +1409,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7. Personnel Management
                 </h3>
                 <div className="mb-6 ml-4 space-y-3">
@@ -1455,13 +1439,13 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
-                <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">
+                <h2 className="font-display text-xl font-bold text-ink mb-6 text-center">
                   Exhibit B – Data Protection Addendum
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1. Introduction
                 </h3>
                 <p className="mb-6">
@@ -1475,7 +1459,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Platform (the "<strong>Agreement</strong>").
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   2. Definitions
                 </h3>
                 <p className="mb-4">
@@ -1557,7 +1541,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3. General; Termination
                 </h3>
                 <p className="mb-4">
@@ -1582,7 +1566,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   termination of the Agreement.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   4. Scope of this Addendum
                 </h3>
                 <p className="mb-6">
@@ -1592,7 +1576,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Customer Personal Data governed by EU Data Protection Law.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   5. Role and Scope of the Processing
                 </h3>
                 <p className="mb-4">
@@ -1620,7 +1604,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Destinations or parties associated therewith.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   6. Subprocessing
                 </h3>
                 <p className="mb-4">
@@ -1663,7 +1647,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   convenience.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   7. Security
                 </h3>
                 <p className="mb-4">
@@ -1718,7 +1702,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   and (d) maintaining its own backups of Customer Data.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   8. Data Subject Requests
                 </h3>
                 <p className="mb-6">
@@ -1737,7 +1721,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   be responsible for responding to any such request.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   9. Return or Deletion of Data
                 </h3>
                 <p className="mb-4">
@@ -1753,17 +1737,17 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   this Addendum.
                 </p>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
-                <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">
+                <h2 className="font-display text-xl font-bold text-ink mb-6 text-center">
                   Annex A – EU Annex
                 </h2>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   1. Definitions; Processing of Data
                 </h3>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Definitions
                 </h4>
                 <p className="mb-6">
@@ -1779,7 +1763,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Standard Contractual Clauses.
                 </p>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Subject Matter and Details of Processing
                 </h4>
                 <p className="mb-6">
@@ -1797,7 +1781,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   ingest into the Platform under the Agreement.
                 </p>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Roles and Regulatory Compliance; Authorization
                 </h4>
                 <p className="mb-6">
@@ -1814,7 +1798,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   which can be found at Morningful.com/privacy-policy.
                 </p>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Morningful's Compliance with Instructions
                 </h4>
                 <p className="mb-6">
@@ -1825,11 +1809,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   prohibits Morningful from doing so).
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   2. Data Security
                 </h3>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Morningful Security Measures, Controls and Assistance
                 </h4>
                 <p className="mb-4">
@@ -1857,7 +1841,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   other way as directed at the time.
                 </p>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Audits and Reviews of Compliance
                 </h4>
                 <p className="mb-4">
@@ -1930,7 +1914,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   </p>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   3. Impact Assessments and Consultations
                 </h3>
                 <p className="mb-6">
@@ -1945,11 +1929,11 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   this Addendum.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-ink mb-3">
                   4. Data Transfers
                 </h3>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Data Processing Facilities
                 </h4>
                 <p className="mb-6">
@@ -1962,7 +1946,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Protection Law.
                 </p>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Privacy Shield
                 </h4>
                 <p className="mb-6">
@@ -1976,7 +1960,7 @@ const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({
                   Morningful shall inform the Customer.
                 </p>
 
-                <h4 className="text-base font-semibold text-gray-900 mb-3">
+                <h4 className="text-base font-semibold text-ink mb-3">
                   Standard Contractual Clauses
                 </h4>
                 <p className="mb-4">

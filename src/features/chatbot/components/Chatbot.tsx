@@ -234,14 +234,14 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="mb-4 w-80 sm:w-96 h-96 bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
+            className="mb-4 w-80 sm:w-96 h-96 bg-surface rounded-xl shadow-card-lg border border-border flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#00d4ff] to-[#0099cc] p-4 text-white">
+            <div className="bg-gradient-to-br from-brand-secondary to-brand p-4 text-white">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Bot className="w-5 h-5" />
-                  <span className="font-semibold">Cash Flow Assistant</span>
+                  <span className="font-display font-semibold">Cash Flow Assistant</span>
                 </div>
                 <button
                   onClick={toggleChat}
@@ -267,13 +267,13 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
                   <div
                     className={`max-w-xs px-3 py-2 rounded-lg ${
                       message.isBot
-                        ? 'bg-gray-100 text-gray-800'
-                        : 'bg-gradient-to-r from-[#00d4ff] to-[#0099cc] text-white'
+                        ? 'bg-surface-muted text-ink'
+                        : 'bg-brand text-white'
                     }`}
                   >
                     <div className="flex items-start space-x-2">
                       {message.isBot && (
-                        <Bot className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#00d4ff]" />
+                        <Bot className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand" />
                       )}
                       {!message.isBot && (
                         <User className="w-4 h-4 mt-0.5 flex-shrink-0 text-white/80" />
@@ -290,13 +290,13 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
                   animate={{ opacity: 1 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-gray-100 px-3 py-2 rounded-lg">
+                  <div className="bg-surface-muted px-3 py-2 rounded-lg">
                     <div className="flex items-center space-x-2">
-                      <Bot className="w-4 h-4 text-[#00d4ff]" />
+                      <Bot className="w-4 h-4 text-brand" />
                       <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                        <div className="w-2 h-2 bg-ink-soft/50 rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-ink-soft/50 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                        <div className="w-2 h-2 bg-ink-soft/50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                       </div>
                     </div>
                   </div>
@@ -315,7 +315,7 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
                       <button
                         key={topic}
                         onClick={() => handleTopicSelection(topic)}
-                        className="text-left p-3 bg-white border border-gray-200 hover:border-[#00d4ff] hover:bg-[#00d4ff]/5 rounded-lg transition-all duration-200 text-sm font-medium text-gray-700 hover:text-[#00d4ff]"
+                        className="text-left p-3 bg-surface border border-border hover:border-brand hover:bg-brand/5 rounded-lg transition-all duration-200 text-sm font-medium text-ink hover:text-brand"
                       >
                         {topic}
                       </button>
@@ -329,7 +329,7 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
 
             {/* Input */}
             {!isComplete && !showTopicSelection && (
-              <div className="border-t border-gray-200 p-4">
+              <div className="border-t border-border p-4">
                 <div className="flex space-x-2">
                   <input
                     ref={inputRef}
@@ -338,13 +338,13 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
                     onChange={(e) => setCurrentInput(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Type your response..."
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent"
+                    className="flex-1 border border-border rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
                     disabled={isTyping}
                   />
                   <button
                     onClick={handleSendMessage}
                     disabled={!currentInput.trim() || isTyping}
-                    className="bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] disabled:opacity-50 disabled:cursor-not-allowed text-white p-2 rounded-lg transition-all duration-200"
+                    className="bg-brand hover:bg-brand-secondary disabled:opacity-50 disabled:cursor-not-allowed text-white p-2 rounded-lg transition-colors duration-200"
                   >
                     <Send className="w-4 h-4" />
                   </button>
@@ -357,10 +357,9 @@ export const Chatbot: React.FC<ChatbotProps> = () => {
 
       {/* Chat Toggle Button */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleChat}
-        className="w-14 h-14 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-200"
+        className="w-14 h-14 bg-brand hover:bg-brand-secondary rounded-full shadow-card flex items-center justify-center text-white transition-colors duration-200"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (

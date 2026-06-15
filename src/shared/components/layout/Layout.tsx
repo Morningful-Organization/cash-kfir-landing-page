@@ -17,8 +17,8 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
-      <main className="pt-16">{children}</main>
+      <Navigation onContactClick={onContactClick} />
+      <main className="pt-20">{children}</main>
       <Footer
         onContactClick={onContactClick}
         onPrivacyPolicyClick={onPrivacyPolicyClick}

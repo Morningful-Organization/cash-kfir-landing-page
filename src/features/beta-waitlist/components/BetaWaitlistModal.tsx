@@ -21,8 +21,8 @@ const FormField: React.FC<FormFieldProps> = ({
   fieldName,
 }) => (
   <div className="space-y-1.5 sm:space-y-2">
-    <label className="text-xs sm:text-sm font-medium text-[#1a2332] flex items-center">
-      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-[#00d4ff] flex-shrink-0" />
+    <label className="text-xs sm:text-sm font-medium text-ink flex items-center">
+      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-brand flex-shrink-0" />
       <span className="truncate">{label}</span>
     </label>
     {children}
@@ -46,15 +46,15 @@ const SuccessMessage = () => (
     {...ANIMATION_VARIANTS.fadeInUp}
     className="text-center py-8 sm:py-12"
   >
-    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full flex items-center justify-center">
+    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-brand rounded-full flex items-center justify-center">
         <div className="w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full" />
       </div>
     </div>
-    <h3 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-2">
+    <h3 className="text-xl sm:text-2xl font-display font-bold text-ink mb-2">
       Thank You!
     </h3>
-    <p className="text-gray-600 text-sm sm:text-base px-2">
+    <p className="text-ink-soft text-sm sm:text-base px-2">
       We've received your request and will be in touch shortly with Beta access
       details.
     </p>
@@ -154,7 +154,7 @@ const BetaWaitlistModal: React.FC<BetaWaitlistModalProps> = ({
   }, [isOpen, onClose]);
 
   const inputClassName =
-    'w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent transition-all duration-200 text-sm sm:text-base';
+    'w-full px-3 py-2 sm:px-4 sm:py-3 border border-border rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all duration-200 text-sm sm:text-base';
 
   return (
     <AnimatePresence>
@@ -184,41 +184,25 @@ const BetaWaitlistModal: React.FC<BetaWaitlistModalProps> = ({
             aria-describedby="modal-description"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#1a2332] to-[#0f1419] text-white p-4 sm:p-6 md:p-8 relative overflow-hidden">
-              <div className="absolute inset-0">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 90, 0],
-                    opacity: [0.1, 0.2, 0.1],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-[#00d4ff] to-transparent rounded-full blur-2xl"
-                />
-              </div>
-
-              <div className="relative flex justify-between items-start">
+            <div className="bg-surface-muted border-b border-border p-4 sm:p-6 md:p-8">
+              <div className="flex justify-between items-start">
                 <div className="flex-1 pr-2">
                   <h2
                     id="modal-title"
-                    className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2"
+                    className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink mb-1 sm:mb-2"
                   >
                     Join Beta Waitlist
                   </h2>
                   <p
                     id="modal-description"
-                    className="text-gray-300 text-sm sm:text-base"
+                    className="text-ink-soft text-sm sm:text-base"
                   >
                     See how our platform can transform your financial operations
                   </p>
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 sm:p-3 hover:bg-white/10 rounded-full transition-colors duration-200 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className="p-2 sm:p-3 text-ink-soft hover:bg-ink/5 hover:text-ink rounded-full transition-colors duration-200 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
                   aria-label="Close modal"
                   type="button"
                 >
@@ -240,7 +224,7 @@ const BetaWaitlistModal: React.FC<BetaWaitlistModalProps> = ({
                 >
                   {/* Personal Information Section */}
                   <div className="space-y-3 sm:space-y-4">
-                    <h3 className="text-sm font-semibold text-[#1a2332] border-b border-gray-100 pb-2 sm:hidden">
+                    <h3 className="text-sm font-semibold text-ink border-b border-border pb-2 sm:hidden">
                       Personal Information
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -315,7 +299,7 @@ const BetaWaitlistModal: React.FC<BetaWaitlistModalProps> = ({
 
                   {/* Business Information Section */}
                   <div className="space-y-3 sm:space-y-4">
-                    <h3 className="text-sm font-semibold text-[#1a2332] border-b border-gray-100 pb-2 sm:hidden">
+                    <h3 className="text-sm font-semibold text-ink border-b border-border pb-2 sm:hidden">
                       Business Information
                     </h3>
 
@@ -441,7 +425,7 @@ const BetaWaitlistModal: React.FC<BetaWaitlistModalProps> = ({
                       type="button"
                       variant="outline"
                       onClick={onClose}
-                      className="flex-1 border-2 border-gray-200 text-gray-600 hover:bg-gray-50 px-4 py-3 sm:px-6 sm:py-3 h-auto min-h-[48px] text-base sm:text-lg rounded-lg sm:rounded-xl transition-all duration-300"
+                      className="flex-1 px-4 py-3 sm:px-6 sm:py-3 h-auto min-h-[48px] text-base sm:text-lg rounded-lg sm:rounded-xl"
                       aria-label="Cancel and close modal"
                     >
                       Cancel
@@ -449,7 +433,7 @@ const BetaWaitlistModal: React.FC<BetaWaitlistModalProps> = ({
                     <Button
                       type="submit"
                       loading={isSubmitting}
-                      className="flex-1 bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] font-semibold px-4 py-3 sm:px-6 sm:py-3 h-auto min-h-[48px] text-base sm:text-lg rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00d4ff]/25 focus:ring-2 focus:ring-[#00d4ff] focus:ring-offset-2"
+                      className="flex-1 bg-brand hover:bg-brand-secondary text-white font-semibold px-4 py-3 sm:px-6 sm:py-3 h-auto min-h-[48px] text-base sm:text-lg rounded-lg sm:rounded-xl shadow-card"
                       disabled={isSubmitting}
                       aria-describedby={
                         submitStatus === 'error' ? 'submit-error' : undefined

@@ -1,10 +1,14 @@
 export { default as HeroSection } from './components/HeroSection';
 export { default as DemoSection } from './components/DemoSection';
+export { default as HowItWorksSection } from './components/HowItWorksSection';
 export { default as StatsSection } from './components/StatsSection';
 export { default as FeaturesSection } from './components/FeaturesSection';
 export { default as PlaidSecuritySection } from './components/PlaidSecuritySection';
+export { default as HowWeUseAISection } from './components/HowWeUseAISection';
 export { default as SolutionsSection } from './components/SolutionsSection';
 export { default as ChatbotDemoSection } from './components/ChatbotDemoSection';
 export { default as TestimonialsSection } from './components/TestimonialsSection';
+export { default as MeetTheTeamSection } from './components/MeetTheTeamSection';
 export { default as PricingSection } from './components/PricingSection';
+export { default as FAQSection } from './components/FAQSection';
 export { default as CTASection } from './components/CTASection';

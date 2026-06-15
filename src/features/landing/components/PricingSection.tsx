@@ -1,9 +1,11 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Sparkles, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { Button } from '../../../shared/components/ui/Button';
+import { SectionHeading } from '../../../shared/components/ui/SectionHeading';
 import { useScrollAnimation } from '../../../shared/hooks/useAnimation';
 import { useAnalytics } from '../../../shared/hooks';
+import { APP_CONFIG } from '../../../shared/config/environment';
 
 type BillingCycle = 'monthly' | 'annual';
 
@@ -92,7 +94,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
 
   const handleSelectPlan = (planName: string) => {
     trackCTAClick(`Select plan: ${planName}`, 'pricing_section');
-    window.open('https://app.morningful.ai', '_blank');
+    window.open(APP_CONFIG.APP_URL, '_blank');
   };
 
   const handleContactSalesClick = () => {
@@ -101,80 +103,42 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
   };
 
   return (
-    <section
-      id="pricing"
-      ref={ref}
-      className="py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden"
-    >
-      <div className="absolute inset-0 pointer-events-none">
+    <section id="pricing" ref={ref} className="bg-surface-muted py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.08, 0.15, 0.08],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-20 left-1/4 w-96 h-96 bg-[#00d4ff] rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.05, 0.12, 0.05],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 4,
-          }}
-          className="absolute bottom-20 right-1/4 w-80 h-80 bg-[#1a2332] rounded-full blur-3xl"
-        />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center px-5 py-2 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-full text-[#1a2332] font-medium mb-6">
-            <Sparkles className="w-4 h-4 mr-2 text-[#00d4ff]" />
-            Simple, transparent pricing
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#1a2332] mb-6">
-            Choose the plan that
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#0099cc]">
-              {' '}
-              fits your team
-            </span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Start with a 14-day free trial. No credit card required. Switch or
-            cancel anytime.
-          </p>
+          <SectionHeading
+            align="center"
+            eyebrow="Pricing"
+            title="Choose the plan that fits your team"
+            description="Start with a 14-day free trial. No credit card required. Switch or cancel anytime."
+          />
         </motion.div>
 
         {/* Billing cycle toggle */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="flex justify-center mb-14"
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="mt-10 flex justify-center"
         >
-          <div className="relative inline-flex items-center p-1.5 bg-white border border-gray-200 rounded-full shadow-sm">
+          <div className="relative inline-flex items-center rounded-full border border-border bg-surface p-1.5 shadow-card">
             <motion.div
               animate={{ left: indicator.left, width: indicator.width }}
               transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-              className="absolute inset-y-1.5 bg-[#1a2332] rounded-full shadow-md"
+              className="absolute inset-y-1.5 rounded-full bg-ink"
             />
             <button
               ref={monthlyBtnRef}
               type="button"
               onClick={() => setBillingCycle('monthly')}
-              className={`relative z-10 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 ${
+              className={`relative z-10 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-300 ${
                 billingCycle === 'monthly'
                   ? 'text-white'
-                  : 'text-gray-500 hover:text-gray-700'
+                  : 'text-ink-soft hover:text-ink'
               }`}
             >
               Monthly
@@ -183,18 +147,18 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
               ref={annualBtnRef}
               type="button"
               onClick={() => setBillingCycle('annual')}
-              className={`relative z-10 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 flex items-center gap-2 ${
+              className={`relative z-10 flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-300 ${
                 billingCycle === 'annual'
                   ? 'text-white'
-                  : 'text-gray-500 hover:text-gray-700'
+                  : 'text-ink-soft hover:text-ink'
               }`}
             >
               Annual
               <span
-                className={`text-xs font-bold px-2 py-0.5 rounded-full transition-colors duration-300 ${
+                className={`rounded-full px-2 py-0.5 font-mono text-xs transition-colors duration-300 ${
                   billingCycle === 'annual'
-                    ? 'bg-[#00d4ff] text-[#1a2332]'
-                    : 'bg-[#00d4ff]/15 text-[#0099cc]'
+                    ? 'bg-brand text-white'
+                    : 'bg-brand/10 text-brand'
                 }`}
               >
                 Save 25%
@@ -204,7 +168,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
         </motion.div>
 
         {/* Plan cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="mx-auto mt-14 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
           {PLANS.map((plan, index) => {
             const isFree = plan.monthlyPrice === 0;
             const displayPrice =
@@ -215,148 +179,87 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
             return (
               <motion.div
                 key={plan.name}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }
                 }
-                transition={{ delay: 0.3 + index * 0.15, duration: 0.7 }}
-                className={`relative rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 ${
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                className={`relative flex flex-col rounded-2xl border bg-surface p-8 ${
                   plan.highlighted
-                    ? 'bg-gradient-to-br from-[#1a2332] to-[#0f1419] text-white shadow-2xl shadow-[#00d4ff]/20 border border-[#00d4ff]/40'
-                    : 'bg-white text-[#1a2332] shadow-xl hover:shadow-2xl border border-gray-100'
+                    ? 'border-brand ring-2 ring-brand shadow-card-lg'
+                    : 'border-border shadow-card'
                 }`}
               >
                 {plan.highlighted && (
-                  <div className="absolute top-0 right-0 left-0 flex justify-center">
-                    <div className="bg-[#00d4ff] text-[#1a2332] text-xs font-bold tracking-wider uppercase px-5 py-1.5 rounded-b-xl shadow-lg">
-                      Most Popular
-                    </div>
-                  </div>
+                  <span className="absolute right-8 top-8 font-mono text-xs font-medium uppercase tracking-eyebrow text-brand">
+                    Most popular
+                  </span>
                 )}
 
-                <div
-                  className={`p-8 lg:p-10 ${
-                    plan.highlighted ? 'pt-14' : 'pt-10'
-                  }`}
-                >
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                    <p
-                      className={`text-sm ${
-                        plan.highlighted ? 'text-gray-300' : 'text-gray-500'
-                      }`}
-                    >
-                      {plan.tagline}
-                    </p>
-                  </div>
+                <div className="mb-6">
+                  <h3 className="font-display text-2xl font-semibold tracking-tight text-ink">
+                    {plan.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-soft">{plan.tagline}</p>
+                </div>
 
-                  <div className="mb-6">
-                    <div className="flex items-baseline">
-                      <span className="text-2xl font-semibold mr-1">$</span>
-                      <motion.span
-                        key={`${plan.name}-${billingCycle}`}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="text-5xl lg:text-6xl font-bold tracking-tight"
-                      >
-                        {formatPrice(displayPrice)}
-                      </motion.span>
-                      <span
-                        className={`ml-2 text-lg ${
-                          plan.highlighted ? 'text-gray-400' : 'text-gray-500'
-                        }`}
-                      >
-                        /mo
+                <div className="mb-6">
+                  <div className="flex items-baseline text-ink">
+                    <span className="mr-1 text-2xl font-semibold">$</span>
+                    <motion.span
+                      key={`${plan.name}-${billingCycle}`}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="font-display text-5xl font-semibold tracking-tight tabular-figures lg:text-6xl"
+                    >
+                      {formatPrice(displayPrice)}
+                    </motion.span>
+                    <span className="ml-2 text-lg text-ink-soft">/mo</span>
+                  </div>
+                  <div className="mt-2 flex h-6 items-center text-sm">
+                    {isFree ? null : billingCycle === 'annual' ? (
+                      <span className="text-ink-soft tabular-figures">
+                        ${formatPrice(plan.annualTotal)} billed annually{' '}
+                        <span className="ml-1 font-medium text-brand">
+                          Save 25%
+                        </span>
                       </span>
-                    </div>
-                    <div className="h-6 mt-2 flex items-center text-sm">
-                      {isFree ? null : billingCycle === 'annual' ? (
-                        <span
-                          className={
-                            plan.highlighted ? 'text-gray-300' : 'text-gray-600'
-                          }
-                        >
-                          ${formatPrice(plan.annualTotal)} billed annually{' '}
-                          <span className="font-semibold text-[#00d4ff] ml-1">
-                            Save 25%
-                          </span>
-                        </span>
-                      ) : (
-                        <span
-                          className={
-                            plan.highlighted ? 'text-gray-400' : 'text-gray-500'
-                          }
-                        >
-                          Billed monthly
-                        </span>
-                      )}
-                    </div>
+                    ) : (
+                      <span className="text-ink-soft">Billed monthly</span>
+                    )}
                   </div>
+                </div>
 
-                  <div
-                    className={`inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full mb-8 ${
-                      plan.highlighted
-                        ? 'bg-[#00d4ff]/15 text-[#00d4ff] border border-[#00d4ff]/30'
-                        : 'bg-[#00d4ff]/10 text-[#0099cc] border border-[#00d4ff]/20'
-                    }`}
-                  >
-                    {isFree ? 'No card required' : '14-day free trial'}
-                  </div>
+                <p className="mb-8 font-mono text-xs uppercase tracking-eyebrow text-ink-soft">
+                  {isFree ? 'No card required' : '14-day free trial'}
+                </p>
 
-                  <Button
-                    size="lg"
-                    onClick={() => handleSelectPlan(plan.name)}
-                    className={`w-full h-auto py-4 text-base font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] group ${
-                      plan.highlighted
-                        ? 'bg-[#00d4ff] hover:bg-[#00b8e6] text-[#1a2332] hover:shadow-xl hover:shadow-[#00d4ff]/30'
-                        : 'bg-[#1a2332] hover:bg-[#0f1419] text-white'
-                    }`}
-                  >
-                    {plan.ctaLabel}
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
+                <Button
+                  size="lg"
+                  variant={plan.highlighted ? 'default' : 'outline'}
+                  onClick={() => handleSelectPlan(plan.name)}
+                  className="group w-full"
+                >
+                  {plan.ctaLabel}
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Button>
 
-                  <div
-                    className={`mt-8 pt-8 border-t ${
-                      plan.highlighted ? 'border-white/10' : 'border-gray-100'
-                    }`}
-                  >
-                    <p
-                      className={`text-xs font-semibold uppercase tracking-wider mb-4 ${
-                        plan.highlighted ? 'text-gray-400' : 'text-gray-500'
-                      }`}
-                    >
-                      What's included
-                    </p>
-                    <ul className="space-y-3">
-                      {plan.features.map(feature => (
-                        <li
-                          key={feature}
-                          className="flex items-start text-sm leading-relaxed"
-                        >
-                          <span
-                            className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mr-3 mt-0.5 ${
-                              plan.highlighted
-                                ? 'bg-[#00d4ff]/20'
-                                : 'bg-[#00d4ff]/15'
-                            }`}
-                          >
-                            <Check className="w-3 h-3 text-[#00d4ff]" />
-                          </span>
-                          <span
-                            className={
-                              plan.highlighted
-                                ? 'text-gray-200'
-                                : 'text-gray-700'
-                            }
-                          >
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="mt-8 border-t border-border pt-8">
+                  <p className="mb-4 font-mono text-xs uppercase tracking-eyebrow text-ink-soft">
+                    What's included
+                  </p>
+                  <ul className="space-y-3">
+                    {plan.features.map(feature => (
+                      <li
+                        key={feature}
+                        className="flex items-start text-sm leading-relaxed text-ink"
+                      >
+                        <Check className="mr-3 mt-0.5 h-5 w-5 flex-shrink-0 text-brand" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.div>
             );
@@ -366,14 +269,14 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onContactClick }) => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-center text-sm text-gray-500 mt-12"
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="mt-12 text-center text-sm text-ink-soft"
         >
           Need a custom plan for your enterprise?{' '}
           <button
             type="button"
             onClick={handleContactSalesClick}
-            className="text-[#00d4ff] font-semibold hover:underline"
+            className="font-medium text-brand hover:underline"
           >
             Contact our sales team
           </button>

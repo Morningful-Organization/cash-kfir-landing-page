@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, Sparkles, Bell, LayoutDashboard, Bot, RefreshCw } from 'lucide-react';
+import { Play, Pause, Check } from 'lucide-react';
 import { useScrollAnimation } from '../../../shared/hooks/useAnimation';
+import { SectionHeading } from '../../../shared/components/ui/SectionHeading';
+import { APP_CONFIG } from '../../../shared/config/environment';
+
+const features = [
+  'Unified dashboard',
+  'Daily AI insights',
+  'Smart alerts',
+  'Auto bank sync',
+];
 
 const DemoSection: React.FC = () => {
   const { ref, isInView } = useScrollAnimation();
@@ -34,122 +43,98 @@ const DemoSection: React.FC = () => {
     }
   };
 
-  return (
-    <section
-      ref={ref}
-      id="demo"
-      className="relative py-24 lg:py-32 bg-gradient-to-b from-[#0f1419] via-[#1a2332] to-[#0f1419] text-white overflow-hidden"
-    >
-      {/* Ambient glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-[#00d4ff]/10 blur-[120px] rounded-full" />
-      </div>
+  // Display the app host without the protocol for the browser-chrome label.
+  const appHost = APP_CONFIG.APP_URL.replace(/^https?:\/\//, '');
 
-      <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
+  return (
+    <section ref={ref} id="demo" className="bg-surface-muted py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 lg:mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center px-4 py-2 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-full text-sm text-[#00d4ff] font-medium mb-6">
-            <Sparkles className="w-4 h-4 mr-2" />
-            See it in action
-          </div>
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              From bank chaos to
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-[#00d4ff] to-[#0099cc] bg-clip-text text-transparent">
-              clear decisions in seconds
-            </span>
-          </h2>
-          <p className="text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Watch how Morningful syncs every account, surfaces AI insights, and
-            tells your finance team exactly what to do next.
-          </p>
+          <SectionHeading
+            align="center"
+            eyebrow="See it in action"
+            title="Watch Morningful run the morning treasury review"
+            description="Every account syncs into one live view, surfaces the insights that matter, and tells your finance team exactly what to do next."
+            className="mb-12 lg:mb-16"
+          />
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={
-            isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }
-          }
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative group"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mx-auto max-w-5xl"
         >
-          {/* Glow ring */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#00d4ff]/40 via-[#0099cc]/40 to-[#00d4ff]/40 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-
-          {/* Video frame */}
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-[#0f1419] shadow-2xl">
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card-lg">
             {/* Browser chrome */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#1a2332] border-b border-white/5">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-400/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-                <div className="w-3 h-3 rounded-full bg-green-400/80" />
+            <div className="flex items-center justify-between border-b border-border px-4 py-3">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-border" />
+                <span className="h-3 w-3 rounded-full bg-border" />
+                <span className="h-3 w-3 rounded-full bg-border" />
               </div>
-              <div className="hidden sm:flex items-center px-4 py-1 bg-white/5 rounded-md text-xs text-gray-400 font-mono">
-                app.morningful.ai
+              <div className="hidden items-center rounded-md bg-surface-muted px-4 py-1 font-mono text-xs text-ink-soft sm:flex">
+                {appHost}
               </div>
-              <div className="flex items-center space-x-1.5">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs text-gray-400">Live</span>
+              <div className="flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                <span className="font-mono text-xs uppercase tracking-eyebrow text-ink-soft">
+                  Live
+                </span>
               </div>
             </div>
 
-            <video
-              ref={videoRef}
-              className="block w-full h-auto bg-[#0f1419]"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/videos/MorningfulVideov2-poster.jpg"
-              aria-label="Morningful dashboard demo"
-            >
-              <source src="/videos/MorningfulVideov2.mp4" type="video/mp4" />
-              Your browser does not support video playback.
-            </video>
+            <div className="group relative">
+              <video
+                ref={videoRef}
+                className="block h-auto w-full bg-surface"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/videos/MorningfulVideov2-poster.jpg"
+                aria-label="Morningful dashboard demo"
+              >
+                <source src="/videos/MorningfulVideov2.mp4" type="video/mp4" />
+                Your browser does not support video playback.
+              </video>
 
-            {/* Play/Pause overlay */}
-            <button
-              type="button"
-              onClick={togglePlay}
-              aria-label={isPlaying ? 'Pause demo' : 'Play demo'}
-              className="absolute bottom-4 right-4 flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#00d4ff] hover:text-[#1a2332] hover:scale-110"
-            >
-              {isPlaying ? (
-                <Pause className="w-5 h-5" />
-              ) : (
-                <Play className="w-5 h-5 ml-0.5" />
-              )}
-            </button>
+              {/* Play/Pause overlay */}
+              <button
+                type="button"
+                onClick={togglePlay}
+                aria-label={isPlaying ? 'Pause demo' : 'Play demo'}
+                className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-ink/80 text-white opacity-0 shadow-card transition-all duration-200 hover:bg-brand group-hover:opacity-100"
+              >
+                {isPlaying ? (
+                  <Pause className="h-5 w-5" />
+                ) : (
+                  <Play className="ml-0.5 h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
         </motion.div>
 
-        {/* Caption strip */}
+        {/* Feature row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-3 mt-12 lg:mt-16"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mx-auto mt-10 flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-3"
         >
-          {[
-            { icon: LayoutDashboard, label: 'Unified dashboard' },
-            { icon: Bot, label: 'Daily AI insights' },
-            { icon: Bell, label: 'Smart alerts' },
-            { icon: RefreshCw, label: 'Auto bank sync' },
-          ].map((item) => (
+          {features.map(label => (
             <div
-              key={item.label}
-              className="flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm text-gray-200 hover:border-[#00d4ff]/40 hover:bg-white/10 transition-colors"
+              key={label}
+              className="flex items-center gap-2 text-sm font-medium text-ink"
             >
-              <item.icon className="w-4 h-4 mr-2 text-[#00d4ff]" />
-              {item.label}
+              <Check className="h-4 w-4 flex-none text-brand" />
+              {label}
             </div>
           ))}
         </motion.div>

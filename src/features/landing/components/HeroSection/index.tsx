@@ -1,44 +1,60 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import HeroContent from './HeroContent';
-import HeroVisual from './HeroVisual';
-import ScrollIndicator from './ScrollIndicator';
+import HeroCarousel from './HeroCarousel';
+import { useAnalytics } from '../../../../shared/hooks';
 
-const BackgroundElements = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    <motion.div
-      animate={{
-        x: [0, 100, 0],
-        y: [0, -50, 0],
-        rotate: [0, 180, 360],
-      }}
-      transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-[#00d4ff] to-transparent opacity-10 rounded-full blur-xl"
-    />
-    <motion.div
-      animate={{
-        x: [0, -80, 0],
-        y: [0, 100, 0],
-        scale: [1, 1.5, 1],
-      }}
-      transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-      className="absolute bottom-32 right-16 w-48 h-48 bg-gradient-to-l from-[#00d4ff] to-transparent opacity-5 rounded-full blur-2xl"
-    />
-  </div>
-);
+interface HeroSectionProps {
+  onContactClick?: () => void;
+}
 
-const HeroSection: React.FC = () => {
+export type Audience = 'personal' | 'corporate';
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onContactClick }) => {
+  const [audience, setAudience] = useState<Audience>('personal');
+  const { trackFeatureInteraction } = useAnalytics();
+
+  const handleSelect = (opt: Audience) => {
+    setAudience(opt);
+    trackFeatureInteraction('hero_audience', opt);
+  };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#1a2332] via-[#1a2332] to-[#0f1419] text-white">
-      <BackgroundElements />
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-12 pb-24 lg:pt-16 lg:pb-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <HeroContent />
-          <HeroVisual />
+    <section className="relative overflow-hidden bg-surface">
+      {/* Static atmospheric wash — no animated blobs */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-hero-wash"
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-4 pb-20 lg:pt-5 lg:pb-28">
+        {/* Audience toggle */}
+        <div className="flex justify-center">
+          <div
+            role="tablist"
+            aria-label="Choose your use case"
+            className="inline-flex items-center rounded-full border border-border bg-surface p-1 shadow-card"
+          >
+            {(['personal', 'corporate'] as Audience[]).map(opt => (
+              <button
+                key={opt}
+                role="tab"
+                aria-selected={audience === opt}
+                onClick={() => handleSelect(opt)}
+                className={`rounded-full px-6 py-2 text-sm font-medium capitalize transition-colors duration-200 ${
+                  audience === opt
+                    ? 'bg-brand text-white shadow-sm'
+                    : 'text-ink-soft hover:text-ink'
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <ScrollIndicator />
+        <div className="mt-6 grid items-center gap-12 lg:mt-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          <HeroContent audience={audience} onContactClick={onContactClick} />
+          <HeroCarousel />
+        </div>
       </div>
     </section>
   );

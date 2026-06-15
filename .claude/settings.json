@@ -6,7 +6,29 @@
       "Bash(curl -s -o /dev/null -w \"morningful.ai -> HTTP %{http_code}, redirects to: %{redirect_url}\\\\n\" -m 15 https://morningful.ai/)",
       "Bash(curl -s -o /dev/null -w \"www.morningful.ai -> HTTP %{http_code}, redirects to: %{redirect_url}\\\\n\" -m 15 https://www.morningful.ai/)",
       "Bash(curl -s -m 15 https://morningful.ai/robots.txt)",
-      "Bash(curl -s -m 15 -L https://morningful.ai/)"
+      "Bash(curl -s -m 15 -L https://morningful.ai/)",
+      "Bash(cat src/shared/components/index.ts)",
+      "Bash(ls src/shared/components/ui/)",
+      "Bash(cat src/shared/components/ui/index.ts)",
+      "Bash(cat src/shared/components/layout/index.ts)",
+      "PowerShell(npx tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 20; \"EXIT: $LASTEXITCODE\")",
+      "PowerShell(npx tsc --noEmit -p \"C:\\\\Morningful - Landing page\\\\tsconfig.json\" 2>&1)",
+      "Bash(ls src/shared/components/ui/SectionHeading*)",
+      "Bash(ls src/shared/hooks/useAnimation*)",
+      "Bash(echo \"EXIT: $?\")",
+      "PowerShell(cd \"C:\\\\Morningful - Landing page\"; npx tsc --noEmit; \"EXIT: $LASTEXITCODE\")",
+      "Bash(echo \"TSC_EXIT=$?\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.scripts,null,2\\)\\)\")",
+      "Bash(echo \"TSC EXIT: $?\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(python -c ' *)",
+      "Bash(node -e ' *)",
+      "PowerShell(npx tsc --noEmit -p \"C:\\\\Morningful - Landing page\\\\tsconfig.json\"; \"EXIT=$LASTEXITCODE\")",
+      "Bash(echo \"===EXIT $?===\")",
+      "Bash(ls node_modules/.bin/tsc)",
+      "Bash(ls node_modules/framer-motion/package.json)",
+      "Bash(ls node_modules/lucide-react/package.json)"
     ]
   }
 }

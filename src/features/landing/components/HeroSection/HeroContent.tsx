@@ -1,118 +1,173 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '../../../../shared/components/ui/Button';
-import { ANIMATION_VARIANTS } from '../../../../shared/constants/ui';
+import { Eyebrow } from '../../../../shared/components/ui/Eyebrow';
 import { useAnalytics } from '../../../../shared/hooks';
+import { APP_CONFIG } from '../../../../shared/config/environment';
+import type { Audience } from './index';
 
-const HeroContent: React.FC = () => {
+interface HeroContentProps {
+  audience: Audience;
+  onContactClick?: () => void;
+}
+
+const COPY: Record<
+  Audience,
+  { eyebrow: string; headline: string; steps: string[] }
+> = {
+  personal: {
+    eyebrow: 'Personal & business treasury',
+    headline: 'Put your idle cash to work.',
+    steps: [
+      'Connect your banks',
+      'Get AI insights & investment options',
+      'Earn on idle cash',
+    ],
+  },
+  corporate: {
+    eyebrow: 'Multi-client treasury',
+    headline: 'Treasury for every client you manage.',
+    steps: [
+      'Invite clients & connect their banks',
+      'AI analysis, insights & investments',
+      'Earn on idle cash',
+    ],
+  },
+};
+
+const HeroContent: React.FC<HeroContentProps> = ({
+  audience,
+  onContactClick,
+}) => {
   const { trackCTAClick, trackRegisterClick } = useAnalytics();
+  const copy = COPY[audience];
 
   const handleRegister = () => {
-    trackCTAClick('Start free trial', 'hero_section');
-    trackRegisterClick('hero_section', 'https://app.morningful.ai');
-    window.open('https://app.morningful.ai', '_blank');
+    trackCTAClick('Start free trial', `hero_${audience}`);
+    trackRegisterClick(`hero_${audience}`, APP_CONFIG.APP_URL);
+    window.open(APP_CONFIG.APP_URL, '_blank');
   };
 
-  const handleLearnMore = () => {
-    trackCTAClick('Learn More', 'hero_section');
-
-    // Smooth scroll to features section
-    const featuresElement = document.querySelector('#features');
-    if (featuresElement) {
-      featuresElement.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleBookDemo = () => {
+    trackCTAClick('Book a demo', `hero_${audience}`);
+    onContactClick?.();
   };
 
   return (
-    <motion.div
-      {...ANIMATION_VARIANTS.fadeInUp}
-      transition={{ duration: 0.8 }}
-      className="space-y-8"
-    >
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-        className="inline-flex items-center px-4 py-2 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-full text-sm text-[#00d4ff] font-medium"
-      >
-        <span className="w-2 h-2 bg-[#00d4ff] rounded-full mr-2 animate-pulse" />
-        Built for Modern Finance Teams
-      </motion.div>
+    <div className="max-w-xl">
+      {/* Adaptive block: eyebrow + headline + step flow */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={audience}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+        >
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
 
-      <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
-        <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-          Master Your
-        </span>
-        <br />
-        <span className="bg-gradient-to-r from-[#00d4ff] to-[#0099cc] bg-clip-text text-transparent">
-          Company's Treasury
-        </span>
-      </h1>
+          <h1 className="mt-6 font-display text-[2.5rem] leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
+            {copy.headline}
+          </h1>
 
-      <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl">
-        Our intelligent treasury platform gives finance teams real-time
-        visibility across every account, empowering smarter, data-driven cash
-        management decisions.
-      </p>
+          {/* Step flow — numbered vertical timeline */}
+          <ol className="mt-8">
+            {copy.steps.map((step, i) => {
+              const last = i === copy.steps.length - 1;
+              return (
+                <li
+                  key={step}
+                  className={`flex gap-4 ${last ? '' : 'min-h-[3.25rem]'}`}
+                >
+                  <div className="flex flex-col items-center self-stretch">
+                    <span
+                      className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full font-mono text-xs font-semibold ${
+                        last ? 'bg-brand text-white' : 'bg-brand/10 text-brand'
+                      }`}
+                    >
+                      {last ? <Check className="h-3.5 w-3.5" /> : i + 1}
+                    </span>
+                    {!last && (
+                      <span
+                        className="mt-1.5 w-px flex-1 bg-border"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  <span
+                    className={`leading-7 ${
+                      last
+                        ? 'font-semibold text-brand-secondary'
+                        : 'font-medium text-ink'
+                    }`}
+                  >
+                    {step}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+        </motion.div>
+      </AnimatePresence>
 
+      {/* Static block: subhead + CTAs + trust (same for both) */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
-        className="flex flex-col sm:flex-row gap-4"
+        transition={{ duration: 0.5, delay: 0.15 }}
       >
-        <Button
-          size="lg"
-          onClick={handleRegister}
-          className="group bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0088bb] text-[#1a2332] font-semibold px-8 py-4 h-auto text-lg rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00d4ff]/40"
-        >
-          <Sparkles className="mr-2 w-5 h-5" />
-          Start free trial
-          <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-        </Button>
-        <Button
-          variant="outline"
-          size="lg"
-          onClick={handleLearnMore}
-          className="border-2 border-white/20 text-white hover:bg-white/5 hover:border-white/40 px-8 py-4 h-auto text-lg rounded-xl transition-all duration-300"
-        >
-          <ChevronDown className="mr-2 w-5 h-5" />
-          Learn More
-        </Button>
-      </motion.div>
+        <p className="mt-7 max-w-lg text-lg leading-relaxed text-ink-soft">
+          Morningful unifies every bank account into one live view and turns
+          your cash position into daily, CFO-grade insights, so your finance
+          team acts before the day starts.
+        </p>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        className="text-sm text-gray-400"
-      >
-        No credit card required, 14 day free trial, full access.
-      </motion.p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Button size="lg" onClick={handleRegister} className="group">
+            Start free trial
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </Button>
+          <Button variant="outline" size="lg" onClick={handleBookDemo}>
+            Book a demo
+          </Button>
+        </div>
 
-      {/* Trust indicators */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.6 }}
-        className="flex items-center space-x-8 pt-8"
-      >
-        <div className="text-sm text-gray-400">Trusted by 14+ companies</div>
-        <div className="flex space-x-1">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={`trust-indicator-${i}`}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8 + i * 0.1, duration: 0.3 }}
-            >
-              <div className="w-2 h-2 bg-[#00d4ff] rounded-full" />
-            </motion.div>
-          ))}
+        <p className="mt-5 text-sm text-ink-soft">
+          No credit card required · 14-day free trial · Full access.
+        </p>
+
+        {/* Plaid + AWS trust strip */}
+        <div className="mt-7 inline-flex flex-wrap items-center gap-x-4 gap-y-3 rounded-xl border border-border bg-surface px-4 py-2.5 shadow-card">
+          <span className="inline-flex items-center gap-2">
+            <span className="text-sm font-medium text-ink">Secured by</span>
+            <img
+              src="/images/plaid/plaid-logo.png"
+              alt="Plaid"
+              className="h-8 w-auto"
+            />
+          </span>
+          <span
+            className="hidden h-8 w-px bg-border sm:block"
+            aria-hidden="true"
+          />
+          <span className="inline-flex items-center gap-2">
+            <span className="text-sm font-medium text-ink">Hosted on</span>
+            <img
+              src="/images/amazon/awslogo.webp"
+              alt="Amazon Web Services"
+              className="h-6 w-auto"
+            />
+          </span>
+        </div>
+
+        <div className="mt-8 border-t border-border pt-6">
+          <p className="font-mono text-xs uppercase tracking-eyebrow text-ink-soft">
+            Trusted by finance teams at Verobotics, Zoma &amp; 12+ companies
+          </p>
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

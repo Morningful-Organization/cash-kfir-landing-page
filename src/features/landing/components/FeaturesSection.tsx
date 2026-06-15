@@ -7,8 +7,9 @@ import {
   Bot,
   Building2,
   Link2,
-  CheckCircle,
+  Check,
 } from 'lucide-react';
+import { SectionHeading } from '../../../shared/components/ui/SectionHeading';
 import {
   useScrollAnimation,
   useStaggerAnimation,
@@ -25,7 +26,6 @@ const FEATURES_DATA = [
       'Cash optimizer for daily decisions',
       'Smart alerts for unusual activity',
     ],
-    color: 'from-blue-400 to-cyan-500',
   },
   {
     icon: Bot,
@@ -37,7 +37,6 @@ const FEATURES_DATA = [
       'AI agent for finance questions',
       'Deposit and cash-flow recommendations',
     ],
-    color: 'from-indigo-400 to-blue-500',
   },
   {
     icon: PieChart,
@@ -49,7 +48,6 @@ const FEATURES_DATA = [
       'Revenue and runway trend analysis',
       'Sharable management-ready reports',
     ],
-    color: 'from-purple-400 to-indigo-500',
   },
   {
     icon: Building2,
@@ -61,7 +59,6 @@ const FEATURES_DATA = [
       'Centralized alerts and snapshots',
       'Role-based collaboration controls',
     ],
-    color: 'from-emerald-400 to-teal-500',
   },
   {
     icon: Shield,
@@ -73,7 +70,6 @@ const FEATURES_DATA = [
       'Granular access and account controls',
       'Production-ready monitoring and tracing',
     ],
-    color: 'from-green-400 to-emerald-500',
   },
   {
     icon: Link2,
@@ -85,7 +81,6 @@ const FEATURES_DATA = [
       'Automatic sync and status monitoring',
       'Guided reconnect for login-required items',
     ],
-    color: 'from-cyan-400 to-blue-500',
   },
 ];
 
@@ -94,50 +89,56 @@ interface FeatureData {
   title: string;
   description: string;
   bulletPoints: string[];
-  color: string;
 }
 
 interface FeatureCardProps {
   feature: FeatureData;
-  index: number;
+  /** Lead card spans the full first row and shows an expanded layout */
+  featured?: boolean;
+  /** Tailwind col-span utility for the bento grid */
+  spanClassName: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index }) => {
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  feature,
+  featured = false,
+  spanClassName,
+}) => {
   const stagger = useStaggerAnimation(0.1);
+  const Icon = feature.icon;
 
   return (
     <motion.div
       variants={stagger.item}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="group relative bg-white rounded-2xl border border-gray-100 p-8 shadow-lg hover:shadow-2xl transition-all duration-500"
+      className={`group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:border-brand/30 hover:shadow-card sm:p-8 ${spanClassName}`}
     >
-      {/* Background gradient on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand">
+        <Icon className="h-5 w-5" />
+      </span>
 
-      <div className="relative">
-        <div
-          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} p-3 mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}
-        >
-          <feature.icon className="w-8 h-8 text-white" />
-        </div>
+      <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-ink">
+        {feature.title}
+      </h3>
 
-        <h3 className="text-2xl font-bold text-[#1a2332] mb-4 group-hover:text-[#00d4ff] transition-colors duration-300">
-          {feature.title}
-        </h3>
+      <p className="mt-3 leading-relaxed text-ink-soft">
+        {feature.description}
+      </p>
 
-        <p className="text-gray-600 leading-relaxed mb-5">
-          {feature.description}
-        </p>
-
-        <ul className="space-y-2">
-          {feature.bulletPoints.map((point, idx) => (
-            <li key={idx} className="flex items-center text-gray-600">
-              <CheckCircle className="w-4 h-4 text-[#00d4ff] mr-2 flex-shrink-0" />
-              <span className="font-medium">{point}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul
+        className={`mt-5 space-y-2.5 border-t border-border pt-5 ${
+          featured ? 'sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-2.5 sm:space-y-0' : ''
+        }`}
+      >
+        {feature.bulletPoints.map(point => (
+          <li
+            key={point}
+            className="flex items-start gap-2.5 text-sm text-ink-soft"
+          >
+            <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand" />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 };
@@ -146,36 +147,39 @@ const FeaturesSection = () => {
   const { ref, isInView } = useScrollAnimation();
   const stagger = useStaggerAnimation(0.1);
 
+  // Asymmetric bento layout: lead feature spans 8/12, the rest fill in around it.
+  const spans = [
+    'lg:col-span-8',
+    'lg:col-span-4',
+    'lg:col-span-4',
+    'lg:col-span-4',
+    'lg:col-span-4',
+    'lg:col-span-8',
+  ];
+
   return (
-    <section id="features" ref={ref} className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#1a2332] mb-6">
-            Your Financial
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#0099cc]">
-              {' '}
-              Command Center
-            </span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Morningful combines real-time cash visibility, AI recommendations,
-            analytics, and corporate collaboration in one finance operating layer.
-          </p>
-        </motion.div>
+    <section id="features" ref={ref} className="bg-surface py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="The Platform"
+          title="Your financial command center"
+          description="Morningful combines real-time cash visibility, AI recommendations, analytics, and corporate collaboration in one finance operating layer."
+          align="left"
+        />
 
         <motion.div
           variants={stagger.container}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12"
         >
           {FEATURES_DATA.map((feature, index) => (
-            <FeatureCard key={feature.title} feature={feature} index={index} />
+            <FeatureCard
+              key={feature.title}
+              feature={feature}
+              featured={index === 0 || index === FEATURES_DATA.length - 1}
+              spanClassName={spans[index]}
+            />
           ))}
         </motion.div>
       </div>
